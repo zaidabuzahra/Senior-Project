@@ -4,7 +4,12 @@ namespace RunTime.Player
 {
     public class FullBodyState : PlayerBaseState
     {
-        public FullBodyState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator) { }
+        public FullBodyState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
+        {
+            isRoot = true;
+            SetChildState(states.IdleState()); /*this will go to an animation function that will be invoked when the transition ends*/
+        }
+
         public override void Enter()
         {   
             //Play animation

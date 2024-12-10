@@ -4,7 +4,11 @@ namespace RunTime.Player
 {
     public class MagnetState : PlayerBaseState
     {
-        public MagnetState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator) { }
+        public MagnetState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
+        {
+            isRoot = true;
+            SetChildState(states.IdleState());
+        }
 
         public override void Enter()
         {
