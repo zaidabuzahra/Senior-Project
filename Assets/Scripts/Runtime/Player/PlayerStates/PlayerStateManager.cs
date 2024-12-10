@@ -16,9 +16,12 @@ namespace RunTime.Player
 
         [Header("Movement Stats")]
         public float speed;
+        [Range(0f, 0.3f)] 
+        public float turnSpeed;
 
         [Header("Camera Controller")]
-        [SerializeField] private float rotationPower = 3f;
+        [SerializeField] private float rotationPowerX = 3f;
+        [SerializeField] private float rotationPowerY = 3f;
         [SerializeField, Range(0, 180)] private float maxUpperRotationDegree;
         [SerializeField, Range(180, 360)] private float maxLowerRotationDegree;
 
@@ -51,25 +54,25 @@ namespace RunTime.Player
 
         private void Start()
         {
-            currentState = _states.IdleState();
+            currentState = _states.FullBodyState();
             currentState.Enter();
         }
 
         private void Update()
         {
             HandleCameraRotation();
-            currentState.Execute();
+            currentState.UpdateStates();
         }
 
         private void FixedUpdate()
         {
-            currentState.FixedExecute();
+            currentState.FixedUpdateStates();
         }
 
         private void HandleCameraRotation()
         {
-            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.x * rotationPower, Vector3.up);
-            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.y * rotationPower, Vector3.right);
+            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.x * rotationPowerX, Vector3.up);
+            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.y * rotationPowerY, Vector3.right);
 
             var angles = followTransform.transform.localEulerAngles;
             angles.z = 0;
@@ -86,11 +89,6 @@ namespace RunTime.Player
             }
 
             followTransform.transform.localEulerAngles = angles;
-        }
-
-        public void StopCharacter()
-        {
-            Rgbd.linearVelocity = Vector3.zero;
         }
 
         private void LookUpdate(Vector2 value)

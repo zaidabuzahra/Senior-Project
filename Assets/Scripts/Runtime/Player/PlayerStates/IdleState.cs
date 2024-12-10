@@ -9,7 +9,8 @@ namespace RunTime.Player
         public override void Enter()
         {
             //play animation
-            context.StopCharacter();
+            animator.SetBool("Idle", true);
+            StopCharacter();
         }
 
         public override void Execute()
@@ -18,7 +19,10 @@ namespace RunTime.Player
             //multiple animations for idle based on waiting time?
         }
 
-        public override void Exit() { }
+        public override void Exit() 
+        {
+            animator.SetBool("Idle", false);
+        }
 
         public override void FixedExecute() { }
 
@@ -28,6 +32,11 @@ namespace RunTime.Player
             {
                 OnChangeState(states.WalkingState());
             }
+        }
+
+        public void StopCharacter()
+        {
+            context.Rgbd.linearVelocity = Vector3.zero;
         }
     }
 }
