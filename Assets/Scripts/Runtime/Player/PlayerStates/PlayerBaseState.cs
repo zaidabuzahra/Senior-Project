@@ -37,7 +37,7 @@ namespace RunTime
             FixedExecute();
             currentSubState?.FixedUpdateStates();
         }
-        protected void SetChildState(PlayerBaseState newChildState)
+        protected void SetSubState(PlayerBaseState newChildState)
         {
             currentSubState = newChildState;
             newChildState.SetSuperState(this);
@@ -53,7 +53,7 @@ namespace RunTime
             Exit();
             newState.Enter();
             if (isRoot) { context.currentState = newState; }
-            else { currentSuperState?.SetChildState(newState); }
+            else { currentSuperState?.SetSubState(newState); }
         }
         public virtual void OnCheckSwitchStates() { }
     }

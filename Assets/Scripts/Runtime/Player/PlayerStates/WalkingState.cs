@@ -29,7 +29,7 @@ namespace RunTime
             var rightRelative = camRight * context.MoveValue.x;
             _moveDir = forwardRelative + rightRelative;
             if (context.MoveValue == Vector2.zero) return;
-            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.turnSpeed);
+            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.turnSpeed * Time.deltaTime);
         }
 
         public override void OnCheckSwitchStates()
@@ -47,7 +47,7 @@ namespace RunTime
 
         public override void FixedExecute()
         {
-            context.Rgbd.linearVelocity = new Vector3(_moveDir.x, context.Rgbd.linearVelocity.y, _moveDir.z) * context.speed;
+            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * context.speed);
         }
     }
 }

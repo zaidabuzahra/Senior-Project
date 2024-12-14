@@ -7,13 +7,12 @@ namespace RunTime.Player
         public FullBodyState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
         {
             isRoot = true;
-            SetChildState(states.IdleState()); /*this will go to an animation function that will be invoked when the transition ends*/
+            SetSubState(states.IdleState()); /*this will go to an animation function that will be invoked when the transition ends*/
         }
 
         public override void Enter()
         {   
-            //Play animation
-            //Play sound effect
+            //Play animation if needed
             //Equip utility
             //Set aim accuracy
             //Subscribe to input events

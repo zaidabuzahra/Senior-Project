@@ -1,12 +1,4 @@
-using RunTime.Input;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Processors;
-using UnityEngine.Networking.PlayerConnection;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal.Internal;
 
 namespace RunTime.Player
 {
@@ -14,10 +6,21 @@ namespace RunTime.Player
     {
         public PlayerBaseState currentState;
 
+        [Header("Object References")]
+        [SerializeField]
+        private Animator _animator;
+
+        public GameObject followTransform;
+        public GameObject meshObject;
+
+        [Space(10)]
+
         [Header("Movement Stats")]
         public float speed;
-        [Range(0f, 0.3f)] 
+        [Range(0f, 10f)] 
         public float turnSpeed;
+
+        [Space(10)]
 
         [Header("Camera Controller")]
         [SerializeField] private float rotationPowerX = 3f;
@@ -25,15 +28,12 @@ namespace RunTime.Player
         [SerializeField, Range(0, 180)] private float maxUpperRotationDegree;
         [SerializeField, Range(180, 360)] private float maxLowerRotationDegree;
 
-        [Space(5)]
+        [Space(10)]
 
         [Header("Wheel Stats")]
         public float maxSpead;
         public float accelerationRate;
         public float turnRate;
-
-        [SerializeField]
-        private Animator _animator;
 
         public Rigidbody Rgbd { get; private set; }
         private StateFactory _states;
@@ -41,9 +41,6 @@ namespace RunTime.Player
 
         public Vector2 MoveValue { get; private set; }
         private Vector2 _lookValue;
-
-        public GameObject followTransform;
-        public GameObject meshObject;
 
         private void Awake()
         {
