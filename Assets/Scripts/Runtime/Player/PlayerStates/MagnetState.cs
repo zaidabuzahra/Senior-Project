@@ -1,3 +1,4 @@
+using UnityEditor.Playables;
 using UnityEngine;
 
 namespace RunTime.Player
@@ -8,27 +9,34 @@ namespace RunTime.Player
         {
             isRoot = true;
             SetSubState(states.IdleState());
-
-
         }
 
         public override void Enter()
         {
             Debug.Log("magnet enter");
-            animator.SetLayerWeight(animator.GetLayerIndex("Magnet"), 1f);
+            animator.SetTrigger("Magnet");
+            
         }
 
         public override void Execute()
         {
+            OnCheckSwitchStates();
         }
 
         public override void Exit()
         {
-
         }
 
         public override void FixedExecute()
         {
+        }
+
+        public override void OnCheckSwitchStates()
+        {
+            if (context.isAiming)
+            {
+                OnChangeState(states.AimingState());
+            }
         }
     }
 }

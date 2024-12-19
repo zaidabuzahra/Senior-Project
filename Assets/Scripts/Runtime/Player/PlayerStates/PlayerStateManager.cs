@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace RunTime.Player
@@ -10,7 +11,7 @@ namespace RunTime.Player
         [SerializeField]
         private Animator _animator;
 
-        public GameObject followTransform;
+        public GameObject followTransform, sphere;
         public GameObject meshObject;
 
         [Space(10)]
@@ -28,6 +29,8 @@ namespace RunTime.Player
         [SerializeField, Range(0, 180)] private float maxUpperRotationDegree;
         [SerializeField, Range(180, 360)] private float maxLowerRotationDegree;
 
+        public CinemachineVirtualCamera aimVirtaulCamera;
+
         [Space(10)]
 
         [Header("Wheel Stats")]
@@ -41,6 +44,11 @@ namespace RunTime.Player
 
         public Vector2 MoveValue { get; private set; }
         private Vector2 _lookValue;
+
+        public bool canSwitchUtility = true;
+        public bool isAiming;
+        public LayerMask layerMask;
+        RaycastHit hit;
 
         private void Awake()
         {
@@ -98,10 +106,48 @@ namespace RunTime.Player
             MoveValue = value;
         }
 
+        private void SwitchUtilities(UtilityType utility)
+        {
+            if (!canSwitchUtility) return;
+            switch (utility)
+            {
+                case UtilityType.Magnet:
+                    currentState.OnChangeState(_states.MagnetState());
+                    break;
+                case UtilityType.FullBody:
+                    currentState.OnChangeState(_states.FullBodyState());
+                    break;
+            }
+        }
+
+        private void SwitchToMagnet()
+        {
+            SwitchUtilities(UtilityType.Magnet);
+        }
+
+        private void SwitchToFullBody()
+        {
+            SwitchUtilities(UtilityType.FullBody);
+        }
+
+        private void Aim()
+        {
+            isAiming = true;
+        }
+
+        private void UnAim()
+        {
+            isAiming = false;
+        }
+
         private void OnEnable()
         {
             InputSignals.Instance.OnInputeLookUpdate += LookUpdate;
             InputSignals.Instance.OnInputMoveUpdate += MoveUpdate;
+            InputSignals.Instance.OnInputUtilityWheelOpen += SwitchToMagnet;
+            InputSignals.Instance.OnInputUtilityWheelClose += SwitchToFullBody;
+            InputSignals.Instance.OnInputAimPressed += Aim;
+            InputSignals.Instance.OnInputAimReleased += UnAim;
         }
     }
 }

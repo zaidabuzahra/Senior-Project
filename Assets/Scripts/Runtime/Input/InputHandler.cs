@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace RunTime.Input
 {
@@ -20,8 +21,12 @@ namespace RunTime.Input
         }
         public void OnOpenWheelPress(InputAction.CallbackContext context)
         {
-            /*if (context.performed) { InputSignals.Instance.OnInputMoveUpdate?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputMoveUpdate?.Invoke(); }*/
+            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelOpen?.Invoke(); }
+            //else if (context.canceled) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
+        }
+        public void OnCloseWheelPress(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
         }
         public void OnShootPress(InputAction.CallbackContext context)
         {
@@ -37,6 +42,12 @@ namespace RunTime.Input
         {
             if (context.performed) { InputSignals.Instance.OnInputJumpPressed?.Invoke(); }
             else if (context.canceled) { InputSignals.Instance.OnInputJumpReleased?.Invoke(); }
+        }
+
+        public void OnAim(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputAimPressed?.Invoke(); }
+            else if (context.canceled) { InputSignals.Instance.OnInputAimReleased?.Invoke(); }
         }
     }
 }

@@ -17,5 +17,6 @@ namespace RunTime
         public PlayerBaseState FullBodyState() => new FullBodyState(context, this, animator);
         public PlayerBaseState MagnetState() => new MagnetState(context, this, animator);
         public PlayerBaseState WalkingState() => new WalkingState(context, this, animator);
+        public PlayerBaseState AimingState() => new AimingState(context, this, animator);
     }
 }

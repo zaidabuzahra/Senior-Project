@@ -11,8 +11,8 @@ namespace RunTime
         protected Animator animator;
 
         protected bool isRoot;
-        protected PlayerBaseState currentSuperState;
-        protected PlayerBaseState currentSubState;
+        public PlayerBaseState currentSuperState;
+        public PlayerBaseState currentSubState;
 
         public PlayerBaseState (PlayerStateManager context, StateFactory stateFactory, Animator animator)
         {
@@ -48,13 +48,14 @@ namespace RunTime
             currentSuperState = newSuperState;
         }
 
-        protected void OnChangeState(PlayerBaseState newState)
+        public void OnChangeState(PlayerBaseState newState)
         {
             Exit();
             newState.Enter();
             if (isRoot) { context.currentState = newState; }
             else { currentSuperState?.SetSubState(newState); }
         }
+
         public virtual void OnCheckSwitchStates() { }
     }
 }

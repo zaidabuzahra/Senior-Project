@@ -28,7 +28,7 @@ namespace RunTime
             var forwardRelative = camForward * context.MoveValue.y;
             var rightRelative = camRight * context.MoveValue.x;
             _moveDir = forwardRelative + rightRelative;
-            if (context.MoveValue == Vector2.zero) return;
+            if (context.isAiming) return;
             context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.turnSpeed * Time.deltaTime);
         }
 

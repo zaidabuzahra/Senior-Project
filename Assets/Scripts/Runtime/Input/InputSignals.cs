@@ -16,7 +16,11 @@ namespace RunTime
         public UnityAction OnInputInteractReleased = delegate { };
         public UnityAction OnInputShootPressed = delegate { };
         public UnityAction OnInputShootReleased = delegate { };
+        public UnityAction OnInputAimPressed = delegate { };
+        public UnityAction OnInputAimReleased = delegate { };
 
+        public UnityAction OnInputUtilityWheelOpen = delegate { };
+        public UnityAction OnInputUtilityWheelClose = delegate { };
         //Input state
     }
 }
