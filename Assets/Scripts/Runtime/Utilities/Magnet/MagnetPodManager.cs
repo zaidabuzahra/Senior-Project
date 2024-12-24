@@ -1,5 +1,3 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,23 +36,6 @@ namespace RunTime
             {
                 podList[i].SetTrajectory();
             }
-        }
-    }
-
-    [CustomEditor(typeof(MagnetPodManager))]
-    public class ColliderCreatorEditor : Editor
-    {
-
-        // some declaration missing??
-
-        override public void OnInspectorGUI()
-        {
-            MagnetPodManager colliderCreator = (MagnetPodManager)target;
-            if (GUILayout.Button("End"))
-            {
-                colliderCreator.RetrievePods(); // how do i call this?
-            }
-            DrawDefaultInspector();
         }
     }
 }
