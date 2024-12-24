@@ -94,7 +94,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""2776c80d-3c14-4091-8c56-d04ced07a2b0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -112,7 +112,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlipUtility"",
+                    ""type"": ""Button"",
+                    ""id"": ""e09792d6-0713-4c6a-9347-d1da23a8c279"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -536,7 +545,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b84f7bb7-b94a-45e7-bfa4-a558f23482ed"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -552,6 +561,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20f35391-8b1c-41cd-b624-f9872912a3dc"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""FlipUtility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1149,6 +1169,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_FlipUtility = m_Player.FindAction("FlipUtility", throwIfNotFound: true);
         m_Player_OpenWheel = m_Player.FindAction("OpenWheel", throwIfNotFound: true);
         m_Player_CloseWheel = m_Player.FindAction("CloseWheel", throwIfNotFound: true);
         // UI
@@ -1240,6 +1261,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Previous;
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_FlipUtility;
     private readonly InputAction m_Player_OpenWheel;
     private readonly InputAction m_Player_CloseWheel;
     public struct PlayerActions
@@ -1256,6 +1278,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Previous => m_Wrapper.m_Player_Previous;
         public InputAction @Next => m_Wrapper.m_Player_Next;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @FlipUtility => m_Wrapper.m_Player_FlipUtility;
         public InputAction @OpenWheel => m_Wrapper.m_Player_OpenWheel;
         public InputAction @CloseWheel => m_Wrapper.m_Player_CloseWheel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1297,6 +1320,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @FlipUtility.started += instance.OnFlipUtility;
+            @FlipUtility.performed += instance.OnFlipUtility;
+            @FlipUtility.canceled += instance.OnFlipUtility;
             @OpenWheel.started += instance.OnOpenWheel;
             @OpenWheel.performed += instance.OnOpenWheel;
             @OpenWheel.canceled += instance.OnOpenWheel;
@@ -1337,6 +1363,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @FlipUtility.started -= instance.OnFlipUtility;
+            @FlipUtility.performed -= instance.OnFlipUtility;
+            @FlipUtility.canceled -= instance.OnFlipUtility;
             @OpenWheel.started -= instance.OnOpenWheel;
             @OpenWheel.performed -= instance.OnOpenWheel;
             @OpenWheel.canceled -= instance.OnOpenWheel;
@@ -1535,6 +1564,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnPrevious(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnFlipUtility(InputAction.CallbackContext context);
         void OnOpenWheel(InputAction.CallbackContext context);
         void OnCloseWheel(InputAction.CallbackContext context);
     }

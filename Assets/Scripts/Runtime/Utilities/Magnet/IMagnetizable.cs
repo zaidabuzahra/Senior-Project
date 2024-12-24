@@ -1,10 +1,11 @@
-using System.Numerics;
+using UnityEngine;
 
 namespace RunTime
 {
     public interface IMagnetizable
     {
-        public void Push(Vector3 direction, MagnetPole magnetPole);
-        public void Pull(Vector3 direction, MagnetPole magnetPole);
+        public void Interact(Vector3 direction, MagnetPole magnetPole);
+        public void HighlightTarget();
+        public void GrayoutTarget();
     }
 }

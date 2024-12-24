@@ -26,7 +26,10 @@ namespace RunTime.Player
             animator.SetBool("Idle", false);
         }
 
-        public override void FixedExecute() { }
+        public override void FixedExecute() 
+        {
+
+        }
 
         public override void OnCheckSwitchStates()
         {
@@ -38,7 +41,7 @@ namespace RunTime.Player
 
         public void StopCharacter()
         {
-            context.Rgbd.linearVelocity = Vector3.zero;
+            context.Rgbd.linearVelocity = new(0, context.Rgbd.linearVelocity.y, 0);
         }
     }
 }

@@ -1,6 +1,7 @@
 using RunTime.Player;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RunTime
 {
@@ -11,6 +12,9 @@ namespace RunTime
         }
 
         private Vector3 _moveDir;
+        private float _stepHeight = 0.3f; 
+        private float _stepCheckDistance = 0.5f; 
+        private float _stepSmooth = 5f; 
         public override void Enter()
         {
             animator.SetBool("Walking", true);
@@ -47,7 +51,31 @@ namespace RunTime
 
         public override void FixedExecute()
         {
+            if (DetectStep(out Vector3 stepUp))
+            {
+                // Smoothly step up
+                Vector3 targetPosition = context.Rgbd.position + stepUp;
+                context.Rgbd.MovePosition(Vector3.Lerp(context.Rgbd.position, targetPosition, _stepSmooth * Time.fixedDeltaTime));
+            }
+
             context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * context.speed);
+        }
+        private bool DetectStep(out Vector3 stepUp)
+        {
+            stepUp = Vector3.zero;
+
+            // Cast a ray forward to detect obstacle
+            if (Physics.Raycast(context.transform.position + Vector3.up * 0.1f, _moveDir, out RaycastHit hit, _stepCheckDistance))
+            {
+                // Check the height of the obstacle
+                if (hit.point.y - context.transform.position.y <= _stepHeight)
+                {
+                    stepUp = Vector3.up * (hit.point.y - context.transform.position.y);
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

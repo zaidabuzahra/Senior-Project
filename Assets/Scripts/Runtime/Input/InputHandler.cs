@@ -49,5 +49,11 @@ namespace RunTime.Input
             if (context.performed) { InputSignals.Instance.OnInputAimPressed?.Invoke(); }
             else if (context.canceled) { InputSignals.Instance.OnInputAimReleased?.Invoke(); }
         }
+
+        public void OnFlipUtility(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputFlipUtilityPressed?.Invoke(); }
+            else if (context.canceled) { InputSignals.Instance.OnInputFlipUtilityReleased?.Invoke();}
+        }
     }
 }

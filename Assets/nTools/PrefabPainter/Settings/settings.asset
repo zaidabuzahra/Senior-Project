@@ -2687,7 +2687,7 @@ MonoBehaviour:
     - name: Pebble random
       settings:
         brushRadius: 0.78
-        brushSpacing: 0.01
+        brushSpacing: 1.37
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1

@@ -1,9 +1,16 @@
+using Cinemachine;
+using System.ComponentModel.Design.Serialization;
+using UnityEditor;
 using UnityEngine;
 
 namespace RunTime.Player
 {
     public class AimingState : PlayerBaseState
     {
+        private Vector3 _mousePos = Vector3.zero;
+        private Vector2 _screenCenter = new (Screen.width/2, Screen.height/2);
+        private Ray _ray;
+
         public AimingState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator) 
         {
             isRoot = true;
@@ -16,25 +23,35 @@ namespace RunTime.Player
             //animator.SetBool("Aim", true);
             _oldState = context.currentState;
             context.aimVirtaulCamera.gameObject.SetActive(true);
+
+            context.speed = context.aimingSpeed;
+            context.rotationPowerX = context.aimRotationPowerX;
+            context.rotationPowerY = context.aimRotationPowerY;
+            //Speed will be reset on other states
             //play aiming animation
             //play aiming sound
-            //switch cameras
-            //adjust speed
         }
 
+        //player rotates with camera rotation
         public override void Execute()
         {
-            //player rotates with camera rotation
             OnCheckSwitchStates();
-            Vector3 mousePos = Vector3.zero;
-            Vector2 screenCenter = new(Screen.width/2, Screen.height/2);
-            Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-            if (Physics.Raycast(ray, out RaycastHit hit, 999f))
+            _ray = context.Cam.ScreenPointToRay(_screenCenter);
+            if (Physics.Raycast(_ray, out context.Hit, 999f, context.layerMask))
             {
-                mousePos = hit.point;
+                _mousePos = context.Hit.point;
+                if (context.Hit.transform.gameObject != context.aimedAtObject)
+                {
+                    if (context.aimedAtObject.CompareTag("Magnet")) context.aimedAtObject.GetComponent<IMagnetizable>().GrayoutTarget();
+                    context.aimedAtObject = context.Hit.transform.gameObject;
+                }
+                if (context.aimedAtObject.CompareTag("Magnet"))
+                {
+                    context.aimedAtObject.GetComponent<IMagnetizable>()?.HighlightTarget();
+                }
             }
-            //mousePos.y = context.meshObject.transform.position.y;
-            context.sphere.transform.position = mousePos;
+            //Debug sphere
+            context.sphere.transform.position = _mousePos;
             context.meshObject.transform.rotation = Quaternion.Euler(0, context.followTransform.transform.rotation.eulerAngles.y, 0);
         }
 
@@ -44,13 +61,10 @@ namespace RunTime.Player
             context.aimVirtaulCamera.gameObject.SetActive(false);
             //play aiming animation
             //play aiming sound
-            //switch cameras
-            //reset speed
         }
 
         public override void OnCheckSwitchStates()
         {
-            //base.OnCheckSwitchStates();
             if (!context.isAiming)
             {
                 OnChangeState(_oldState);

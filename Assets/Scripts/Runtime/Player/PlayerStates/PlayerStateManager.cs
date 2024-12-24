@@ -17,15 +17,21 @@ namespace RunTime.Player
         [Space(10)]
 
         [Header("Movement Stats")]
-        public float speed;
+        [HideInInspector] public float speed;
+        public float aimingSpeed;
+        public float normalSpeed;
         [Range(0f, 10f)] 
         public float turnSpeed;
 
         [Space(10)]
 
         [Header("Camera Controller")]
-        [SerializeField] private float rotationPowerX = 3f;
-        [SerializeField] private float rotationPowerY = 3f;
+        public float rotationPowerX = 3f;
+        public float rotationPowerY = 3f;
+        public float aimRotationPowerX = 3f;
+        public float aimRotationPowerY = 3f;
+        public float normalRotationPowerX = 3f;
+        public float normalRotationPowerY = 3f;
         [SerializeField, Range(0, 180)] private float maxUpperRotationDegree;
         [SerializeField, Range(180, 360)] private float maxLowerRotationDegree;
 
@@ -48,7 +54,8 @@ namespace RunTime.Player
         public bool canSwitchUtility = true;
         public bool isAiming;
         public LayerMask layerMask;
-        RaycastHit hit;
+        public RaycastHit Hit;
+        public GameObject aimedAtObject = null  ;
 
         private void Awake()
         {

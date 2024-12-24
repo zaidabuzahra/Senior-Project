@@ -14,9 +14,17 @@ namespace RunTime.Player
         {
             //Play animation if needed
             animator.SetTrigger("FullBody");
+
+            context.speed = context.normalSpeed;
+            context.rotationPowerX = context.normalRotationPowerX;
+            context.rotationPowerY = context.normalRotationPowerY;
+
+            InputSignals.Instance.OnInputShootPressed = null;
             //Equip utility
             //Set aim accuracy
             //Subscribe to input events
+
+            //subscribe to utility and flip methods
         }
 
         public override void Execute() 
