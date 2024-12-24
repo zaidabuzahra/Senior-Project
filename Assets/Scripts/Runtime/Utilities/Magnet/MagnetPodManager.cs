@@ -13,6 +13,11 @@ namespace RunTime
 
         private int _podCounter;
 
+        private void OnEnable()
+        {
+            InputSignals.Instance.OnInputRetrieveMagnetPodsPressed += RetrievePods;
+        }
+
         void Start()
         {
             _podCounter = podList.Length;

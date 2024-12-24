@@ -55,7 +55,8 @@ namespace RunTime.Player
         public bool isAiming;
         public LayerMask layerMask;
         public RaycastHit Hit;
-        public GameObject aimedAtObject = null  ;
+        public GameObject aimedAtObject = null;
+        public GameObject uiInstruction;
 
         private void Awake()
         {
@@ -147,6 +148,12 @@ namespace RunTime.Player
             isAiming = false;
         }
 
+        private void SwitchInstructionUI()
+        {
+            bool state = uiInstruction.activeInHierarchy ? false : true;
+            uiInstruction.SetActive(state);
+        }
+
         private void OnEnable()
         {
             InputSignals.Instance.OnInputeLookUpdate += LookUpdate;
@@ -155,6 +162,7 @@ namespace RunTime.Player
             InputSignals.Instance.OnInputUtilityWheelClose += SwitchToFullBody;
             InputSignals.Instance.OnInputAimPressed += Aim;
             InputSignals.Instance.OnInputAimReleased += UnAim;
+            InputSignals.Instance.OnInputJumpPressed += SwitchInstructionUI;
         }
     }
 }

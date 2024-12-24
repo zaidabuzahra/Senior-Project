@@ -20,6 +20,7 @@ namespace RunTime
         public UnityAction OnInputShootReleased = delegate { };
         public UnityAction OnInputAimPressed = delegate { };
         public UnityAction OnInputAimReleased = delegate { };
+        public UnityAction OnInputRetrieveMagnetPodsPressed = delegate { };
 
         public UnityAction OnInputUtilityWheelOpen = delegate { };
         public UnityAction OnInputUtilityWheelClose = delegate { };

@@ -55,5 +55,10 @@ namespace RunTime.Input
             if (context.performed) { InputSignals.Instance.OnInputFlipUtilityPressed?.Invoke(); }
             else if (context.canceled) { InputSignals.Instance.OnInputFlipUtilityReleased?.Invoke();}
         }
+
+        public void OnRetrieveMagnets(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputRetrieveMagnetPodsPressed?.Invoke(); }
+        }
     }
 }

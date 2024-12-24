@@ -11,6 +11,7 @@ namespace RunTime.Player
             isRoot = true;
             SetSubState(states.IdleState());
         }
+
         private MagnetPole currentPole = MagnetPole.Red;
         public override void Enter()
         {
@@ -51,7 +52,7 @@ namespace RunTime.Player
 
         private void ShootPod()
         {
-            if (context.isAiming)
+            if (context.isAiming && context.Hit.transform != null)
             {
                 //context.Hit
                 Debug.Log(context.Hit.point);

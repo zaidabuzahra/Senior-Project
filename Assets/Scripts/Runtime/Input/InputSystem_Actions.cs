@@ -143,6 +143,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RetrievePods"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa0300eb-eca7-4e70-b736-5b9542d027ea"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -572,6 +581,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""FlipUtility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1966726d-c44f-4f38-ae21-fbf034649028"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""RetrievePods"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1172,6 +1192,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_FlipUtility = m_Player.FindAction("FlipUtility", throwIfNotFound: true);
         m_Player_OpenWheel = m_Player.FindAction("OpenWheel", throwIfNotFound: true);
         m_Player_CloseWheel = m_Player.FindAction("CloseWheel", throwIfNotFound: true);
+        m_Player_RetrievePods = m_Player.FindAction("RetrievePods", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1264,6 +1285,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FlipUtility;
     private readonly InputAction m_Player_OpenWheel;
     private readonly InputAction m_Player_CloseWheel;
+    private readonly InputAction m_Player_RetrievePods;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1281,6 +1303,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @FlipUtility => m_Wrapper.m_Player_FlipUtility;
         public InputAction @OpenWheel => m_Wrapper.m_Player_OpenWheel;
         public InputAction @CloseWheel => m_Wrapper.m_Player_CloseWheel;
+        public InputAction @RetrievePods => m_Wrapper.m_Player_RetrievePods;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1329,6 +1352,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CloseWheel.started += instance.OnCloseWheel;
             @CloseWheel.performed += instance.OnCloseWheel;
             @CloseWheel.canceled += instance.OnCloseWheel;
+            @RetrievePods.started += instance.OnRetrievePods;
+            @RetrievePods.performed += instance.OnRetrievePods;
+            @RetrievePods.canceled += instance.OnRetrievePods;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1372,6 +1398,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CloseWheel.started -= instance.OnCloseWheel;
             @CloseWheel.performed -= instance.OnCloseWheel;
             @CloseWheel.canceled -= instance.OnCloseWheel;
+            @RetrievePods.started -= instance.OnRetrievePods;
+            @RetrievePods.performed -= instance.OnRetrievePods;
+            @RetrievePods.canceled -= instance.OnRetrievePods;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1567,6 +1596,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnFlipUtility(InputAction.CallbackContext context);
         void OnOpenWheel(InputAction.CallbackContext context);
         void OnCloseWheel(InputAction.CallbackContext context);
+        void OnRetrievePods(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
