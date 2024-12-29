@@ -18,5 +18,6 @@ namespace RunTime
         public PlayerBaseState MagnetState() => new MagnetState(context, this, animator);
         public PlayerBaseState WalkingState() => new WalkingState(context, this, animator);
         public PlayerBaseState AimingState() => new AimingState(context, this, animator);
+        public PlayerBaseState WheelState() => new WheelState(context, this, animator);
     }
 }

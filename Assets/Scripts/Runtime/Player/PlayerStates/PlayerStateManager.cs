@@ -40,9 +40,12 @@ namespace RunTime.Player
         [Space(10)]
 
         [Header("Wheel Stats")]
+        public WheelManager wheelManager;
+        public float wheelMass;
         public float maxSpead;
         public float accelerationRate;
         public float turnRate;
+        public float maxTurnAngle;
 
         public Rigidbody Rgbd { get; private set; }
         private StateFactory _states;
@@ -125,12 +128,15 @@ namespace RunTime.Player
                 case UtilityType.FullBody:
                     currentState.OnChangeState(_states.FullBodyState());
                     break;
+                case UtilityType.Wheel:
+                    currentState.OnChangeState(_states.WheelState());
+                    break;
             }
         }
 
         private void SwitchToMagnet()
         {
-            SwitchUtilities(UtilityType.Magnet);
+            SwitchUtilities(UtilityType.Wheel);
         }
 
         private void SwitchToFullBody()
