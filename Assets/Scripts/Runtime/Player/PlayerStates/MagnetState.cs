@@ -7,6 +7,7 @@ namespace RunTime.Player
         public MagnetState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
         {
             isRoot = true;
+            Debug.LogError("FullBody");
             SetSubState(states.IdleState());
         }
 
@@ -15,9 +16,9 @@ namespace RunTime.Player
         {
             Debug.Log("magnet enter");
             animator.SetTrigger("Magnet");
-            context.speed = context.normalSpeed;
-            context.rotationPowerX = context.normalRotationPowerX;
-            context.rotationPowerY = context.normalRotationPowerY;
+            //context.speed = context.normalSpeed;
+            //context.rotationPowerX = context.normalRotationPowerX;
+            //context.rotationPowerY = context.normalRotationPowerY;
 
             InputSignals.Instance.OnInputUseUtilityPressed = Remote;
             InputSignals.Instance.OnInputFlipUtilityPressed = FlipUtility;

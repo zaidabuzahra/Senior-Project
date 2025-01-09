@@ -20,10 +20,18 @@ namespace RunTime
             this.animator = animator;
         }
 
-        public abstract void Enter();
+        public virtual void Enter()
+        {
+            Debug.Log(this + " Enter");
+            currentSubState?.Enter();
+        }
         public abstract void Execute();
         public abstract void FixedExecute();
-        public abstract void Exit();
+        public virtual void Exit()
+        {
+            Debug.Log(this + " Exit");
+            currentSubState?.Exit();
+        }
 
         public void UpdateStates()
         {

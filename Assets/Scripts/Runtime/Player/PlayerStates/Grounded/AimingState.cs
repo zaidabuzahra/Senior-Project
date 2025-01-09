@@ -1,3 +1,5 @@
+using Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace RunTime.Player
@@ -14,17 +16,15 @@ namespace RunTime.Player
             SetSubState(states.IdleState());
         }
 
-        PlayerBaseState _oldState;
+        private PlayerBaseState _oldState;
+        private readonly Camera _cam = Camera.main;
         public override void Enter()
         {
             //animator.SetBool("Aim", true);
+            base.Enter();
             _oldState = context.currentState;
-            context.aimVirtaulCamera.gameObject.SetActive(true);
-
-            context.speed = context.aimingSpeed;
-            context.rotationPowerX = context.aimRotationPowerX;
-            context.rotationPowerY = context.aimRotationPowerY;
-            //Speed will be reset on other states
+            CameraSignals.Instance.OnSwitchCamera?.Invoke(Cam.CameraEnum.Aim);
+            context.speed = context.playerData.aimingSpeed;
             //play aiming animation
             //play aiming sound
         }
@@ -33,7 +33,7 @@ namespace RunTime.Player
         public override void Execute()
         {
             OnCheckSwitchStates();
-            _ray = context.Cam.ScreenPointToRay(_screenCenter);
+            _ray = _cam.ScreenPointToRay(_screenCenter);
             if (Physics.Raycast(_ray, out context.Hit, 999f, context.layerMask))
             {
                 _mousePos = context.Hit.point;
@@ -49,15 +49,17 @@ namespace RunTime.Player
             }
             //Debug sphere
             context.sphere.transform.position = _mousePos;
-            context.meshObject.transform.rotation = Quaternion.Euler(0, context.followTransform.transform.rotation.eulerAngles.y, 0);
+            context.meshObject.transform.rotation = Quaternion.Euler(0, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, 0);
         }
 
         public override void Exit()
         {
             //animator.SetBool("Aim", false);
-            context.aimVirtaulCamera.gameObject.SetActive(false);
             //play aiming animation
             //play aiming sound
+            base.Exit();
+            CameraSignals.Instance.OnSwitchCamera?.Invoke(Cam.CameraEnum.Standard);
+            context.speed = context.playerData.speed;
         }
 
         public override void OnCheckSwitchStates()

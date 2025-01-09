@@ -13,10 +13,10 @@ namespace RunTime.Input
         {
             InputSignals.Instance.OnInputeLookUpdate?.Invoke(context.ReadValue<Vector2>());
         }
-        public void OnUseUtility(InputAction.CallbackContext context)
+        public void OnSprinting(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputUseUtilityPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputUseUtilityReleased?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputSprintPressed?.Invoke(); }
+            else if (context.canceled) { InputSignals.Instance.OnInputSprintReleased?.Invoke(); }
         }
         public void OnOpenWheelPress(InputAction.CallbackContext context)
         {

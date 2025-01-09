@@ -10,7 +10,7 @@ namespace RunTime.Player
         {
             //play animation
             animator.SetBool("Idle", true);
-            StopCharacter();
+            //StopCharacter();
         }
 
         public override void Execute()

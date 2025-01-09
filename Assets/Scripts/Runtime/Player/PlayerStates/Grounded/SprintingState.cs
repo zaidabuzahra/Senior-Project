@@ -1,52 +1,36 @@
-using RunTime.Player;
 using UnityEngine;
 
-namespace RunTime
+namespace RunTime.Player
 {
-    public class WalkingState : PlayerBaseState
+    public class SprintingState : PlayerBaseState
     {
-        public WalkingState(PlayerStateManager context, StateFactory stateFactory, Animator animator) : base(context, stateFactory, animator)
+        public SprintingState(PlayerStateManager context, StateFactory stateFactory, Animator animator) : base(context, stateFactory, animator)
         {
         }
 
         private Vector3 _moveDir;
-        private float _stepHeight = 0.3f; 
-        private float _stepCheckDistance = 0.5f; 
-        private float _stepSmooth = 5f; 
+        private readonly float _stepHeight = 0.3f;
+        private readonly float _stepCheckDistance = 0.5f;
+        private readonly float _stepSmooth = 5f;
+        private readonly Camera _cam = Camera.main;
+
         public override void Enter()
         {
-            animator.SetBool("Walking", true);
+            context.speed = context.playerData.sprintSpeed;
         }
 
         public override void Execute()
         {
             OnCheckSwitchStates();
-            var camForward = context.Cam.transform.forward;
-            var camRight = context.Cam.transform.right;
-            camForward.y = camRight.y = 0;
-            camForward.Normalize();
-            camRight.Normalize();
-
-            var forwardRelative = camForward * context.MoveValue.y;
-            var rightRelative = camRight * context.MoveValue.x;
-            _moveDir = forwardRelative + rightRelative;
-            if (context.isAiming) return;
-            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.turnSpeed * Time.deltaTime);
-        }
-
-        public override void OnCheckSwitchStates()
-        {
-            if (context.MoveValue == Vector2.zero)
-            {
-                OnChangeState(states.IdleState());
-            }
+            context.CalculatePlayerRotation(_cam, out _moveDir);
+            if (context.isAiming || _moveDir == Vector3.zero) return;
+            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
         }
 
         public override void Exit()
         {
-            animator.SetBool("Walking", false);
+            context.speed = context.playerData.speed;
         }
-
         public override void FixedExecute()
         {
             if (DetectStep(out Vector3 stepUp))
@@ -74,6 +58,19 @@ namespace RunTime
             }
 
             return false;
+        }
+
+        public override void OnCheckSwitchStates()
+        {
+            if (context.isSprinting) return;
+            if (context.MoveValue == Vector2.zero)
+            {
+                OnChangeState(states.IdleState());
+            }
+            else
+            {
+                OnChangeState(states.WalkingState());
+            }
         }
     }
 }

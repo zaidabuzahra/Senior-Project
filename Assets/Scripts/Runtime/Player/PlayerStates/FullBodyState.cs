@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace RunTime.Player
 {
@@ -7,6 +8,7 @@ namespace RunTime.Player
         public FullBodyState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
         {
             isRoot = true;
+            Debug.LogError("FullBody");
             SetSubState(states.IdleState()); /*this will go to an animation function that will be invoked when the transition ends*/
         }
 
@@ -15,9 +17,9 @@ namespace RunTime.Player
             //Play animation if needed
             animator.SetTrigger("FullBody");
 
-            context.speed = context.normalSpeed;
-            context.rotationPowerX = context.normalRotationPowerX;
-            context.rotationPowerY = context.normalRotationPowerY;
+            //context.speed = context.playerData.movementData.speed;
+            //context.rotationPowerX = context.normalRotationPowerX;
+            //context.rotationPowerY = context.normalRotationPowerY;
 
             InputSignals.Instance.OnInputShootPressed = null;
             //Equip utility
@@ -42,6 +44,16 @@ namespace RunTime.Player
             {
                 OnChangeState(states.AimingState());
             }
+            if (Grounded())
+            {
+                Debug.Log("Grounded");
+            }
+        }
+
+        private bool Grounded()
+        {
+            Physics.Linecast(context.transform.position, Vector3.down, out RaycastHit hit, context.layer);
+            return hit.collider != null;
         }
     }
 }

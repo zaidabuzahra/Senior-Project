@@ -1,115 +1,67 @@
 using Cinemachine;
+using System.Text;
+using UnityEditor.Analytics;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace RunTime.Player
 {
     public class PlayerStateManager : MonoBehaviour
     {
-        public PlayerBaseState currentState;
-
+        //public, seriliazed, private... in that order
+        public PlayerDataSO playerData;
+        public PlayerBaseState currentState; // make private
+        public LayerMask layer; //fix and adjust
         [Header("Object References")]
         [SerializeField]
-        private Animator _animator;
+        private Animator _animator; //organize 
 
-        public GameObject followTransform, sphere;
-        public GameObject meshObject;
+        public GameObject sphere;                 //align and fix
+        public GameObject meshObject;             //align and fix
 
         [Space(10)]
 
         [Header("Movement Stats")]
-        [HideInInspector] public float speed;
-        public float aimingSpeed;
-        public float normalSpeed;
-        [Range(0f, 10f)] 
-        public float turnSpeed;
+        public float speed; //organize
 
         [Space(10)]
 
-        [Header("Camera Controller")]
-        public float rotationPowerX = 3f;
-        public float rotationPowerY = 3f;
-        public float aimRotationPowerX = 3f;
-        public float aimRotationPowerY = 3f;
-        public float normalRotationPowerX = 3f;
-        public float normalRotationPowerY = 3f;
-        [SerializeField, Range(0, 180)] private float maxUpperRotationDegree;
-        [SerializeField, Range(180, 360)] private float maxLowerRotationDegree;
+        public Rigidbody Rgbd; //make public get and organize
+        private StateFactory _states; //organize
 
-        public CinemachineVirtualCamera aimVirtaulCamera;
+        public Vector2 MoveValue { get; private set; } // input related 
+        
+        public bool canSwitchUtility = true;   // readjust and align
+        public bool isAiming;                  // readjust and align
+        public bool jumpPressed;
+        public bool isSprinting;
+        public bool isFalling;
+        public float gravityMultiplier = 1f;
+        public LayerMask layerMask;            // readjust and align
+        public RaycastHit Hit;                 // readjust and align
+        public Transform legTransform;  // organize
 
-        [Space(10)]
-
-        [Header("Wheel Stats")]
-        public WheelManager wheelManager;
-        public float wheelMass;
-        public float maxSpead;
-        public float accelerationRate;
-        public float turnRate;
-        public float maxTurnAngle;
-
-        public Rigidbody Rgbd { get; private set; }
-        private StateFactory _states;
-        public Camera Cam { get; private set; }
-
-        public Vector2 MoveValue { get; private set; }
-        private Vector2 _lookValue;
-
-        public bool canSwitchUtility = true;
-        public bool isAiming;
-        public LayerMask layerMask;
-        public RaycastHit Hit;
-        public GameObject aimedAtObject = null;
-        public GameObject uiInstruction;
-
+        public GameObject uiInstruction;       // UI related
+        public GameObject aimedAtObject = null;// Aim related
         private void Awake()
         {
             _states = new(this, _animator);
-            Cam = Camera.main;
-            Rgbd = GetComponent<Rigidbody>();
         }
 
         private void Start()
         {
-            currentState = _states.FullBodyState();
+            currentState = _states.GroundedState();
             currentState.Enter();
         }
 
         private void Update()
-        {
-            HandleCameraRotation();
+        { 
             currentState.UpdateStates();
         }
 
         private void FixedUpdate()
         {
             currentState.FixedUpdateStates();
-        }
-
-        private void HandleCameraRotation()
-        {
-            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.x * rotationPowerX, Vector3.up);
-            followTransform.transform.rotation *= Quaternion.AngleAxis(_lookValue.y * rotationPowerY, Vector3.right);
-
-            var angles = followTransform.transform.localEulerAngles;
-            angles.z = 0;
-
-            var angle = followTransform.transform.localEulerAngles.x;
-
-            if (angle > 180 && angle < maxLowerRotationDegree)
-            {
-                angles.x = maxLowerRotationDegree;
-            }
-            else if (angle < 180 && angle > maxUpperRotationDegree)
-            {
-                angles.x = maxUpperRotationDegree;
-            }
-
-            followTransform.transform.localEulerAngles = angles;
-        }
-
-        private void LookUpdate(Vector2 value)
-        {
-            _lookValue = value;
         }
 
         private void MoveUpdate(Vector2 value)
@@ -128,15 +80,38 @@ namespace RunTime.Player
                 case UtilityType.FullBody:
                     currentState.OnChangeState(_states.FullBodyState());
                     break;
-                case UtilityType.Wheel:
-                    currentState.OnChangeState(_states.WheelState());
+                default:
                     break;
             }
         }
+        public void CalculatePlayerRotation(Camera cam, out Vector3 moveDir)
+        {
+            var camForward = cam.transform.forward;
+            var camRight = cam.transform.right;
+            camForward.y = camRight.y = 0;
+            camForward.Normalize();
+            camRight.Normalize();
 
+            var forwardRelative = camForward * MoveValue.y;
+            var rightRelative = camRight * MoveValue.x;
+            moveDir = forwardRelative + rightRelative;
+        }
+
+        public bool Grounded()
+        {
+            bool grounded = Physics.CheckSphere(legTransform.position, legTransform.localScale.x, layer);
+            Debug.DrawLine(transform.position, legTransform.position, Color.red);
+            return grounded;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(legTransform.position, legTransform.localScale.x);
+        }
+        #region input functions
         private void SwitchToMagnet()
         {
-            SwitchUtilities(UtilityType.Wheel);
+            SwitchUtilities(UtilityType.Magnet);
         }
 
         private void SwitchToFullBody()
@@ -144,31 +119,54 @@ namespace RunTime.Player
             SwitchUtilities(UtilityType.FullBody);
         }
 
-        private void Aim()
+        private void PressAim()
         {
             isAiming = true;
         }
 
-        private void UnAim()
+        private void ReleaseAim()
         {
             isAiming = false;
         }
 
-        private void SwitchInstructionUI()
+        private void SwitchInstructionUI() // temporary for submissions only
         {
             bool state = uiInstruction.activeInHierarchy ? false : true;
             uiInstruction.SetActive(state);
         }
 
+        private void PressJump()
+        {
+            jumpPressed = true;
+        }
+
+        private void ReleaseJump()
+        {
+            jumpPressed = false;
+        }
+
+        private void PressSprint()
+        {
+            isSprinting = true;
+        }
+
+        private void ReleaseSprint()
+        {
+            isSprinting = false;
+        }
+
         private void OnEnable()
         {
-            InputSignals.Instance.OnInputeLookUpdate += LookUpdate;
             InputSignals.Instance.OnInputMoveUpdate += MoveUpdate;
             InputSignals.Instance.OnInputUtilityWheelOpen += SwitchToMagnet;
             InputSignals.Instance.OnInputUtilityWheelClose += SwitchToFullBody;
-            InputSignals.Instance.OnInputAimPressed += Aim;
-            InputSignals.Instance.OnInputAimReleased += UnAim;
-            InputSignals.Instance.OnInputJumpPressed += SwitchInstructionUI;
+            InputSignals.Instance.OnInputAimPressed += PressAim;
+            InputSignals.Instance.OnInputAimReleased += ReleaseAim;
+            InputSignals.Instance.OnInputJumpPressed += PressJump;
+            InputSignals.Instance.OnInputJumpReleased += ReleaseJump;
+            InputSignals.Instance.OnInputSprintPressed += PressSprint;
+            InputSignals.Instance.OnInputSprintReleased += ReleaseSprint;
         }
+        #endregion
     }
 }
