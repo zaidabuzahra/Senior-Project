@@ -284,7 +284,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4776271941228727139}
         m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnUseUtility
+        m_MethodName: OnSprinting
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -448,7 +448,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: a09a038b13366ee4bb9460595b304960, type: 2}
   layer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   _animator: {fileID: 7485464105438027315}
   sphere: {fileID: 0}
   meshObject: {fileID: 3277787041705713325}
@@ -457,6 +457,9 @@ MonoBehaviour:
   canSwitchUtility: 1
   isAiming: 0
   jumpPressed: 0
+  isSprinting: 0
+  isFalling: 0
+  gravityMultiplier: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 115
@@ -628,8 +631,8 @@ Transform:
   m_GameObject: {fileID: 1353096206641844391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.75, z: 0}
+  m_LocalScale: {x: 0.4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7080772149442624501}

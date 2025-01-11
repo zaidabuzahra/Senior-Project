@@ -40,7 +40,7 @@ namespace RunTime.Player
                 context.Rgbd.MovePosition(Vector3.Lerp(context.Rgbd.position, targetPosition, _stepSmooth * Time.fixedDeltaTime));
             }
 
-            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * context.speed);
+            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.speed * Time.fixedDeltaTime));
         }
         private bool DetectStep(out Vector3 stepUp)
         {

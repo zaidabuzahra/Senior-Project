@@ -1,32 +1,40 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace RunTime
+namespace RunTime.Utilities.Magnet
 {
     public class ConstrainedDoor : MonoBehaviour, IMagnetizable
     {
         [SerializeField] private MagnetPole pole;
         [SerializeField] private float forceStrength;
         [SerializeField] private Rigidbody rb;
-        [SerializeField] private Transform playerPosition;
         [SerializeField] private GameObject highlightObject;
+        [SerializeField] private MovementAxis movementAxis;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        private Vector3 _movementLine;
+
+        private void Start()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            switch (movementAxis)
+            {
+                case MovementAxis.X:
+                    _movementLine = Vector3.right;
+                    break;
+                case MovementAxis.Y:
+                    _movementLine = Vector3.up;
+                    break;
+                case MovementAxis.Z:
+                    _movementLine = Vector3.forward;
+                    break;
+            }
         }
 
         public void Interact(Vector3 direction, MagnetPole magnetPole)
         {
-            direction = magnetPole != pole ? (direction - rb.transform.position).normalized : (rb.transform.position - direction).normalized;
-            ApplyPower(direction);
+            int dir;
+            dir = magnetPole != pole ? 1 : -1;
+            ApplyPower(dir);
         }
 
         public void HighlightTarget()
@@ -38,11 +46,11 @@ namespace RunTime
             highlightObject.SetActive(false);
         }
 
-        private void ApplyPower(Vector3 direction)
+        private void ApplyPower(int direction)
         {
             StopAllCoroutines();
             rb.isKinematic = false;
-            rb.AddForce(direction * forceStrength, ForceMode.Force);
+            rb.AddForce(_movementLine * (direction * forceStrength), ForceMode.Force);
             Debug.Log("Push");
             StartCoroutine(ResetKinematic());
         }
@@ -52,5 +60,10 @@ namespace RunTime
             yield return new WaitForSeconds(0.5f);
             rb.isKinematic = true;
         }
+    }
+
+    public enum MovementAxis
+    {
+        X, Y, Z
     }
 }

@@ -15,8 +15,8 @@ namespace RunTime.Input
         }
         public void OnSprinting(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputSprintPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputSprintReleased?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputUseUtilityPressed?.Invoke(); }
+            else if (context.canceled) { InputSignals.Instance.OnInputUseUtilityReleased?.Invoke(); }
         }
         public void OnOpenWheelPress(InputAction.CallbackContext context)
         {

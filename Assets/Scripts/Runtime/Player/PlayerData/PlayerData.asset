@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae821c298d1b74946a32c07a2c325803, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  speed: 1000
-  sprintSpeed: 25
-  aimingSpeed: 7
+  speed: 750
+  sprintSpeed: 1250
+  aimingSpeed: 3
   turnSpeed: 2
-  jumpPower: 13
+  jumpPower: 15
   airControl: 0.7
-  gravityPower: 80
-  gravityMultiplier: 30
+  gravityPower: 120
+  gravityMultiplier: 25
