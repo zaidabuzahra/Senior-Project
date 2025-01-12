@@ -39,12 +39,12 @@ namespace RunTime.Player
                 _mousePos = context.Hit.point;
                 if (context.Hit.transform.gameObject != context.aimedAtObject)
                 {
-                    if (context.aimedAtObject.CompareTag("Magnet")) context.aimedAtObject.GetComponent<IMagnetizable>().GrayoutTarget();
+                    if (context.aimedAtObject.CompareTag("Magnet")) context.aimedAtObject.GetComponent<Magnetizable>().GrayoutTarget();
                     context.aimedAtObject = context.Hit.transform.gameObject;
                 }
                 if (context.aimedAtObject.CompareTag("Magnet"))
                 {
-                    context.aimedAtObject.GetComponent<IMagnetizable>()?.HighlightTarget();
+                    context.aimedAtObject.GetComponent<Magnetizable>()?.HighlightTarget();
                 }
             }
             //Debug sphere

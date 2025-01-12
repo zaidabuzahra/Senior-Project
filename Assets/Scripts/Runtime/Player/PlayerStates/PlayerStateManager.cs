@@ -18,6 +18,7 @@ namespace RunTime.Player
 
         public GameObject sphere;                 //align and fix
         public GameObject meshObject;             //align and fix
+        public LineRenderer lineRenderer;
 
         [Space(10)]
 
@@ -36,6 +37,7 @@ namespace RunTime.Player
         public bool jumpPressed;
         public bool isSprinting;
         public bool isFalling;
+        public bool isHeld;
         public float gravityMultiplier = 1f;
         public LayerMask layerMask;            // readjust and align
         public RaycastHit Hit;                 // readjust and align
@@ -78,7 +80,7 @@ namespace RunTime.Player
                     currentState.OnChangeState(_states.MagnetState());
                     break;
                 case UtilityType.FullBody:
-                    currentState.OnChangeState(_states.FullBodyState());
+                    currentState.OnChangeState(_states.GroundedState());
                     break;
                 default:
                     break;
@@ -155,6 +157,12 @@ namespace RunTime.Player
             isSprinting = false;
         }
 
+        private void Held()
+        {
+            Debug.Log(isHeld);
+
+            isHeld = false;
+        }
         private void OnEnable()
         {
             InputSignals.Instance.OnInputMoveUpdate += MoveUpdate;
@@ -166,6 +174,7 @@ namespace RunTime.Player
             InputSignals.Instance.OnInputJumpReleased += ReleaseJump;
             InputSignals.Instance.OnInputSprintPressed += PressSprint;
             InputSignals.Instance.OnInputSprintReleased += ReleaseSprint;
+            InputSignals.Instance.OnInputUseUtilityReleased += Held;
         }
         #endregion
     }

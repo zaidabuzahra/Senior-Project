@@ -8,6 +8,7 @@ namespace RunTime
         //Input events
         public UnityAction<Vector2> OnInputMoveUpdate = delegate { };
         public UnityAction<Vector2> OnInputeLookUpdate = delegate { };
+        public UnityAction<bool> OnInputUtilityHeld = delegate { };
         public UnityAction OnInputJumpPressed = delegate { };
         public UnityAction OnInputJumpReleased = delegate { };
         public UnityAction OnInputSprintPressed = delegate { };

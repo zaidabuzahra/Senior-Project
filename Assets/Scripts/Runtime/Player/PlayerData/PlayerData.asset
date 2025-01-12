@@ -16,7 +16,7 @@ MonoBehaviour:
   sprintSpeed: 1250
   aimingSpeed: 3
   turnSpeed: 2
-  jumpPower: 15
+  jumpPower: 20
   airControl: 0.7
-  gravityPower: 120
-  gravityMultiplier: 25
+  gravityPower: 2000
+  gravityMultiplier: 2.5
