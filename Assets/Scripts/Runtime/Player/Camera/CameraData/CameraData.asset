@@ -19,4 +19,4 @@ MonoBehaviour:
   downLimit: 34.5
   upLimit: 310
   aimDownLimit: 0
-  aimUpLimit: 295
+  aimUpLimit: 290

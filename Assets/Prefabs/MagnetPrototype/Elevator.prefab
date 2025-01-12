@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1324114735287399805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5200005, y: -4.28, z: 9.280001}
+  m_LocalPosition: {x: 1.5200005, y: 4.85, z: 9.280001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -437,7 +437,7 @@ Transform:
   m_GameObject: {fileID: 4612924108984676989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5200005, y: 5.29, z: 9.280001}
+  m_LocalPosition: {x: 1.5200005, y: 14.42, z: 9.280001}
   m_LocalScale: {x: 1.7777998, y: 1.7777998, z: 1.7778}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -563,8 +563,8 @@ GameObject:
   - component: {fileID: 37079799561082144}
   - component: {fileID: 6778276246347525094}
   - component: {fileID: 5783410360420537705}
-  - component: {fileID: 8023672599165900193}
   - component: {fileID: 9024586597528699425}
+  - component: {fileID: 7440711914419574736}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Magnet
@@ -662,26 +662,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8023672599165900193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6684521488728752651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bf859cd29251cb42a970bab8bca08cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pole: 0
-  forceStrength: 75
-  rb: {fileID: 9024586597528699425}
-  highlightObject: {fileID: 1690634570048550141}
-  movementAxis: 2
-  points:
-  - {fileID: 322110286347493198}
-  - {fileID: 563709009194329927}
 --- !u!54 &9024586597528699425
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -709,6 +689,25 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 122
   m_CollisionDetection: 1
+--- !u!114 &7440711914419574736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684521488728752651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb85dc825ba12c448dc1911a2efcef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 9024586597528699425}
+  highlightObject: {fileID: 1690634570048550141}
+  forceStrength: 75
+  pole: 0
+  points:
+  - {fileID: 322110286347493198}
+  - {fileID: 563709009194329927}
 --- !u!1 &7896011345484046539
 GameObject:
   m_ObjectHideFlags: 0
