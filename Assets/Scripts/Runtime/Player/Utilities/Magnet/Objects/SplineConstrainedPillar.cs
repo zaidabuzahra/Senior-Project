@@ -4,17 +4,22 @@ using UnityEngine.Splines;
 
 namespace RunTime.Utilities.Magnet
 {
-    [RequireComponent(typeof(SplineAnimate))]
-    public class SplineConstrainedPillar : MonoBehaviour, IMagnetizable
+    public class SplineConstrainedPillar : Magnetizable
     {
-        [SerializeField] private MagnetPole pole;
-        [SerializeField] private float forceStrength;
-        [SerializeField] private Rigidbody rb;
-        [SerializeField] private GameObject highlightObject;
+        [SerializeField] private SplineAnimate splineAnimation;
 
-        private SplineAnimate splineAnimation;
+        [Range(0f, 10f)]
+        public float num;
+        public bool check;
+        public float time;
 
-        public void Interact(Vector3 direction, MagnetPole magnetPole)
+        private void Update()
+        {
+            if (check) { return; }
+            splineAnimation.ElapsedTime = Mathf.Lerp(splineAnimation.ElapsedTime, num, Time.deltaTime);
+        }
+
+        public override void Interact(Vector3 direction, MagnetPole magnetPole)
         {
             int dir = 1;
 
@@ -22,18 +27,9 @@ namespace RunTime.Utilities.Magnet
             ApplyPower(dir);
         }
 
-        public void HighlightTarget()
-        {
-            highlightObject.SetActive(true);
-        }
-        public void GrayoutTarget()
-        {
-            highlightObject.SetActive(false);
-        }
-
         private void ApplyPower(int dir)
         {
-            splineAnimation.ElapsedTime = 1f;
+            splineAnimation.ElapsedTime = Mathf.Lerp(splineAnimation.ElapsedTime, 1, time);
         }
     }
 }

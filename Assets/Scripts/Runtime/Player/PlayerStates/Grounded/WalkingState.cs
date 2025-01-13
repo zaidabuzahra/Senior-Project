@@ -1,3 +1,4 @@
+using Cinemachine;
 using RunTime.Player;
 using UnityEngine;
 
@@ -26,8 +27,9 @@ namespace RunTime
             context.CalculatePlayerRotation(_cam, out _moveDir);
             if (context.isAiming || _moveDir == Vector3.zero) return;
             context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
+            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.transform.rotation.eulerAngles.z);
         }
-
+        
         public override void OnCheckSwitchStates()
         {
             if (context.MoveValue == Vector2.zero)
