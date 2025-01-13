@@ -17,7 +17,8 @@ namespace RunTime.Player
         private Animator _animator; //organize 
 
         public GameObject sphere;                 //align and fix
-        public GameObject meshObject;             //align and fix
+        public GameObject followObject;             //align and fix
+        public GameObject meshObject;
         public LineRenderer lineRenderer;
 
         [Space(10)]
