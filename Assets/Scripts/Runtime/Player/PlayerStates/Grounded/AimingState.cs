@@ -49,7 +49,8 @@ namespace RunTime.Player
             }
             //Debug sphere
             context.sphere.transform.position = _mousePos;
-            context.followObject.transform.rotation = Quaternion.Euler(0, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, 0);
+            context.meshObject.transform.rotation = Quaternion.Euler(0,_cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y,0);
+            context.followObject.transform.rotation = Quaternion.Euler(_cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles);
         }
 
         public override void Exit()

@@ -16,7 +16,7 @@ MonoBehaviour:
   verticalSensetivity: 0.1
   aimHorizontalSensetivity: 0.03
   aimVerticalSensitivty: 0.02
-  downLimit: 34.5
-  upLimit: 310
+  downLimit: 70
+  upLimit: 290
   aimDownLimit: 0
-  aimUpLimit: 290
+  aimUpLimit: 270
