@@ -17,7 +17,7 @@ namespace RunTime.Player
         public override void Enter()
         {
             //can dash
-            Debug.LogError("Air");
+            //Debug.LogError("Air");
             base.Enter();
         }
 

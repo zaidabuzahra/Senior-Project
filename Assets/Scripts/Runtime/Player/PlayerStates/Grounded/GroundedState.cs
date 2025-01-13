@@ -13,7 +13,7 @@ namespace RunTime.Player
 
         public override void Enter()
         {
-            Debug.LogError("Grounded");
+            //Debug.LogError("Grounded");
             base.Enter();
             animator.SetTrigger("FullBody");
         }

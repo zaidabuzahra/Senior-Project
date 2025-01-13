@@ -3301,14 +3301,12 @@ namespace nTools.PrefabPainter
                                     rigidbody.Sleep();
                                 }
 
-#pragma warning disable CS0618 // Type or member is obsolete
                                 if (rigidbody2D != null && rigidbody2D.isKinematic == false)
                                 {
                                     m_ThrowTool.m_rigidbody2Ds.Add(rigidbody2D);
                                     rigidbody2D.isKinematic = true;
                                     rigidbody2D.Sleep();
                                 }
-#pragma warning restore CS0618 // Type or member is obsolete
                             });
                         }
                     }
@@ -3344,6 +3342,7 @@ namespace nTools.PrefabPainter
                 break;
             }
         }
+
 
         void OnToolDisabled(PaintTool tool)
         {
@@ -3381,10 +3380,8 @@ namespace nTools.PrefabPainter
 
                     foreach (var rigidbody2D in m_ThrowTool.m_rigidbody2Ds.Where(rigidbody2D => rigidbody2D != null))
                     {
-#pragma warning disable CS0618 // Type or member is obsolete
-                            rigidbody2D.isKinematic = false;
-#pragma warning restore CS0618 // Type or member is obsolete
-                        }
+                        rigidbody2D.isKinematic = false;
+                    }
 
                     #if UNITY_2022_2_OR_NEWER
                     Physics.simulationMode = m_ThrowTool.lastSimulationMode;

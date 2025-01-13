@@ -123,8 +123,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RipplesColor: {r: 0.19631894, g: 0.2530234, b: 0.3433962, a: 0}
-    - _RipplesSpeed: {r: 0, g: 1.48, b: 0, a: 0}
+    - _RipplesColor: {r: 0.46115336, g: 0.6395454, b: 0.90188676, a: 0.85882354}
+    - _RipplesSpeed: {r: 0, g: 0.9, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

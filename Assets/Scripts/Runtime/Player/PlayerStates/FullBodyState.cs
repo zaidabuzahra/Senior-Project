@@ -8,7 +8,7 @@ namespace RunTime.Player
         public FullBodyState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
         {
             isRoot = true;
-            Debug.LogError("FullBody");
+            //Debug.LogError("FullBody");
             SetSubState(states.IdleState()); /*this will go to an animation function that will be invoked when the transition ends*/
         }
 

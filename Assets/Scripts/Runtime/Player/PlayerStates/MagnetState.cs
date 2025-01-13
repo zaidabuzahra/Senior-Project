@@ -7,7 +7,7 @@ namespace RunTime.Player
         public MagnetState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator)
         {
             isRoot = true;
-            Debug.LogError("FullBody");
+            //Debug.LogError("FullBody");
             SetSubState(states.IdleState());
         }
 
