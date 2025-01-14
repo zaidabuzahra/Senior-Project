@@ -1410,7 +1410,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes:Assets/Scenes/Baran/Baran.unity
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &104467415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7085,9 +7088,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Scenes/Baran.unity
   m_SourcePrefab: {fileID: 100100000, guid: d3ea1107385087844ab7e5be3f6929d4, type: 3}
 =======
+=======
+>>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: a0d3a90e64f4972478bfd2ac70bb7cdf, type: 3}
 --- !u!1 &495289732
 GameObject:
@@ -37748,10 +37754,13 @@ SceneRoots:
   - {fileID: 196204359}
   - {fileID: 545097119}
   - {fileID: 1796068914}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Scenes/Baran.unity
   - {fileID: 7438322309260002261}
   - {fileID: 1898856593}
 =======
+=======
+>>>>>>> Stashed changes
   - {fileID: 1214709203}
   - {fileID: 137356355}
   - {fileID: 494064046}
@@ -37762,4 +37771,7 @@ SceneRoots:
   - {fileID: 904392163}
   - {fileID: 1719707619}
   - {fileID: 1024519642}
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes:Assets/Scenes/Baran/Baran.unity
+=======
+>>>>>>> Stashed changes
