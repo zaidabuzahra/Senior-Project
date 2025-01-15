@@ -38,7 +38,6 @@ namespace RunTime.Player
         public bool jumpPressed;
         public bool isSprinting;
         public bool isFalling;
-        public bool isHeld;
         public float gravityMultiplier = 1f;
         public LayerMask layerMask;            // readjust and align
         public RaycastHit Hit;                 // readjust and align
@@ -158,12 +157,6 @@ namespace RunTime.Player
             isSprinting = false;
         }
 
-        private void Held()
-        {
-            Debug.Log(isHeld);
-
-            isHeld = false;
-        }
         private void OnEnable()
         {
             InputSignals.Instance.OnInputMoveUpdate += MoveUpdate;
@@ -175,7 +168,6 @@ namespace RunTime.Player
             InputSignals.Instance.OnInputJumpReleased += ReleaseJump;
             InputSignals.Instance.OnInputSprintPressed += PressSprint;
             InputSignals.Instance.OnInputSprintReleased += ReleaseSprint;
-            InputSignals.Instance.OnInputUseUtilityReleased += Held;
         }
         #endregion
     }

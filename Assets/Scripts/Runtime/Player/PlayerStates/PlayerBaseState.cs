@@ -22,14 +22,12 @@ namespace RunTime
 
         public virtual void Enter()
         {
-            Debug.Log(this + " Enter");
             currentSubState?.Enter();
         }
         public abstract void Execute();
         public abstract void FixedExecute();
         public virtual void Exit()
         {
-            Debug.Log(this + " Exit");
             currentSubState?.Exit();
         }
 
