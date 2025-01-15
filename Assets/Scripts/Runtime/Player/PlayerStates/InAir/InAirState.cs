@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace RunTime.Player
@@ -7,8 +8,8 @@ namespace RunTime.Player
         public InAirState(PlayerStateManager context, StateFactory stateFactory, Animator animator) : base(context, stateFactory, animator)
         {
             isRoot = true;
-            if (context.jumpPressed) { Debug.LogWarning("SpawnJump"); SetSubState(states.JumpState()); }
-            else { Debug.LogWarning("SpawnFall"); SetSubState(states.FallingState()); }
+            if (context.jumpPressed) { SetSubState(states.JumpState()); }
+            else { SetSubState(states.FallingState()); }
         }
 
         private Vector3 _moveDir;
@@ -27,7 +28,8 @@ namespace RunTime.Player
             OnCheckSwitchStates();
             context.CalculatePlayerRotation(_cam, out  _moveDir);
             if (context.isAiming || _moveDir == Vector3.zero) return;
-            context.followObject.transform.rotation = Quaternion.Slerp(context.followObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
+            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
+            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.transform.rotation.eulerAngles.z);
         }
 
         public override void Exit()
