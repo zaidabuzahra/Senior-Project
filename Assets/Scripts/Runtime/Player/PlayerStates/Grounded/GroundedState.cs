@@ -15,6 +15,7 @@ namespace RunTime.Player
         {
             //Debug.LogError("Grounded");
             base.Enter();
+            context.Rgbd.linearVelocity = new Vector3(context.Rgbd.linearVelocity.x, 0, context.Rgbd.linearVelocity.z);
             animator.SetTrigger("FullBody");
         }
 
@@ -32,6 +33,7 @@ namespace RunTime.Player
         {
 
         }
+
         public override void OnCheckSwitchStates()
         {
             if (context.isAiming)

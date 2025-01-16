@@ -261,9 +261,9 @@ MonoBehaviour:
   - {fileID: 7224051895648632938}
   index: 0
   dynamicGait: 1
-  timeBetweenSteps: 1.5
+  timeBetweenSteps: 0.25
   stepDurationRatio: 2
-  maxTargetDistance: 6
+  maxTargetDistance: 3
   lastStep: 0
   useAlignment: 1
   nextLegTri: 0400000006000000050000000700000001000000000000000300000002000000
@@ -302,7 +302,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105028103311130195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 857400f38c38e434aa2ea92139f69839, type: 2}
   m_CullingMode: 0
@@ -436,6 +436,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpiderLeg
       objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 9138911414261534906, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -508,6 +512,10 @@ PrefabInstance:
     - target: {fileID: 5226627865482928809, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_Name
       value: SpiderLeg (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: optimalRestingPosition.z
@@ -586,6 +594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpiderLeg (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 9138911414261534906, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -658,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 5226627865482928809, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_Name
       value: SpiderLeg (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: optimalRestingPosition.z
@@ -737,6 +753,10 @@ PrefabInstance:
       value: SpiderLeg (7)
       objectReference: {fileID: 0}
     - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: optimalRestingPosition.z
       value: 2
       objectReference: {fileID: 0}
@@ -813,6 +833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpiderLeg (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 9138911414261534906, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -885,6 +909,10 @@ PrefabInstance:
     - target: {fileID: 5226627865482928809, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_Name
       value: SpiderLeg (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: optimalRestingPosition.z
@@ -964,8 +992,12 @@ PrefabInstance:
       value: SpiderLeg (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
+      propertyPath: stepCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959508361302371842, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: optimalRestingPosition.z
-      value: 25
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 9138911414261534906, guid: 0e8458a994f61134fbe56d8c62269be8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -720,29 +720,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 256580322561585513, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 856033259714049830, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 856033259714049830, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: optimalRestingPosition.z
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1014025007316824797, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1014025007316824797, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.19
       objectReference: {fileID: 0}
     - target: {fileID: 1014025007316824797, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -22.27
       objectReference: {fileID: 0}
     - target: {fileID: 1014025007316824797, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -772,57 +760,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1282190167814816669, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1287438691837262733, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851917795038739906, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1932340901488655658, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2105028103311130195, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
       propertyPath: m_Name
       value: Spider
-      objectReference: {fileID: 0}
-    - target: {fileID: 2125270372615509438, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: timeBetweenSteps
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2125270372615509438, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: maxTargetDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675445741215889840, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7224051895648632938, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592820887287451436, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687512496068467104, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111929604625192203, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: stepCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8314706231928161159, guid: acda48bc489a382499a97208cc1bf5c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,6 +12,7 @@ namespace RunTime
 
         public override void Enter()
         {
+            Debug.LogWarning("Falling Entered");
             context.gravityMultiplier = context.playerData.gravityMultiplier;
             context.isFalling = true;
         }
