@@ -11,7 +11,6 @@ namespace RunTime
         }
 
         private Vector3 _moveDir;
-        private readonly Camera _cam = Camera.main;
 
         public override void Enter()
         {
@@ -21,10 +20,10 @@ namespace RunTime
         public override void Execute()
         {
             OnCheckSwitchStates();
-            context.CalculatePlayerRotation(_cam, out _moveDir);
+            context.CalculatePlayerRotation(context.cam, out _moveDir);
             if (context.isAiming || _moveDir == Vector3.zero) return;
             context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
-            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.followObject.transform.rotation.eulerAngles.z);
+            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, context.cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.followObject.transform.rotation.eulerAngles.z);
         }
         
         public override void OnCheckSwitchStates()
@@ -41,16 +40,16 @@ namespace RunTime
 
         public override void FixedExecute()
         {
-            if (DetectStep(out Vector3 stepUp))
+            /*if (DetectStep(out Vector3 stepUp))
             {
                 // Smoothly step up
                 Vector3 targetPosition = context.Rgbd.position + stepUp;
                 context.Rgbd.MovePosition(Vector3.Lerp(context.Rgbd.position, targetPosition, context.playerData.stepSmooth * Time.fixedDeltaTime));
-            }
+            }*/
 
             //context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.speed * Time.fixedDeltaTime));
-            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.playerData.speed * Time.fixedDeltaTime));
-        }
+            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.playerData.walkingSpeed * Time.fixedDeltaTime));
+        }/*
         private bool DetectStep(out Vector3 stepUp)
         {
             stepUp = Vector3.zero;
@@ -68,7 +67,7 @@ namespace RunTime
             }
 
             return false;
-        }
+        }*/
 
         public override void Exit()
         {

@@ -13,7 +13,6 @@ namespace RunTime.Player
         }
 
         private Vector3 _moveDir;
-        private readonly Camera _cam = Camera.main;
 
         public override void Enter()
         {
@@ -26,10 +25,10 @@ namespace RunTime.Player
         {
             //empty
             OnCheckSwitchStates();
-            context.CalculatePlayerRotation(_cam, out  _moveDir);
+            context.CalculatePlayerRotation(context.cam, out  _moveDir);
             if (context.isAiming || _moveDir == Vector3.zero) return;
-            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x * context.playerData.airControl, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
-            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, _cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.transform.rotation.eulerAngles.z);
+            context.meshObject.transform.rotation = Quaternion.Slerp(context.meshObject.transform.rotation, Quaternion.LookRotation(new Vector3(_moveDir.x, 0, _moveDir.z)), context.playerData.turnSpeed * Time.deltaTime);
+            context.followObject.transform.rotation = Quaternion.Euler(context.followObject.transform.rotation.eulerAngles.x, context.cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y, context.transform.rotation.eulerAngles.z);
         }
 
         public override void Exit()
@@ -43,7 +42,7 @@ namespace RunTime.Player
         {
             //apply gravity
             //apply air movement
-            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.playerData.speed * context.playerData.airControl * Time.fixedDeltaTime));
+            context.Rgbd.AddForce(new Vector3(_moveDir.x, 0, _moveDir.z) * (context.playerData.walkingSpeed * context.playerData.airControl * Time.fixedDeltaTime));
             //context.Rgbd.linearVelocity += new Vector3(_moveDir.x, -context.playerData.gravityPower, _moveDir.z) * (context.playerData.speed * context.playerData.airControl);
             context.Rgbd.AddForce(new Vector3(0, -context.playerData.gravityPower * context.gravityMultiplier * Time.fixedDeltaTime, 0));
         }
