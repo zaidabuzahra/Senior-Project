@@ -13,7 +13,7 @@ namespace RunTime
 
         private void OnEnable()
         {
-            InputSignals.Instance.OnInputRetrieveMagnetPodsPressed += RetrievePods;
+            InputSignals.Instance.OnInputRetrieveMagnetPods += RetrievePods;
         }
 
         void Start()

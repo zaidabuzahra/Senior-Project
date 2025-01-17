@@ -60,7 +60,7 @@ namespace RunTime.Player
             //play aiming sound
             base.Exit();
             CameraSignals.Instance.OnSwitchCamera?.Invoke(Cam.CameraEnum.Standard);
-            context.speed = context.playerData.speed;
+            context.speed = context.playerData.walkingSpeed;
         }
 
         public override void OnCheckSwitchStates()

@@ -184,10 +184,6 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4776271941228727139}
         m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
@@ -204,18 +200,10 @@ MonoBehaviour:
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2776c80d-3c14-4091-8c56-d04ced07a2b0
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4776271941228727139}
         m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnSprinting
+        m_MethodName: OnDash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -287,7 +275,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4776271941228727139}
         m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnOpenWheelPress
+        m_MethodName: OnUseMainUtility
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -303,23 +291,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4776271941228727139}
         m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnCloseWheelPress
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9e6a7b10-5408-4ba6-95f9-f78ffcdfee00
-    m_ActionName: 'Player/CloseWheel[/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4776271941228727139}
-        m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnFlipUtility
+        m_MethodName: OnUseSideUtility
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -347,6 +319,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aa0300eb-eca7-4e70-b736-5b9542d027ea
     m_ActionName: 'Player/RetrievePods[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4776271941228727139}
+        m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnSprinting
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ce68aeb4-fbfa-4828-ae6e-6556bf527210
+    m_ActionName: 'Player/Sprint[/Keyboard/ctrl]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4776271941228727139}
+        m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchMagnet
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8617fa91-3852-4f8c-a17e-bf701b162f0f
+    m_ActionName: 'Player/SwitchUtilityMagnet[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4776271941228727139}
+        m_TargetAssemblyTypeName: RunTime.Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchElectiricty
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8dfe4d76-b7cf-40ee-b989-4d54891ca46c
+    m_ActionName: 'Player/SwitchUtilityElectricity[/Keyboard/2]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -380,6 +400,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 192
+  cam: {fileID: 0}
   _animator: {fileID: 7485464105438027315}
   sphere: {fileID: 0}
   followObject: {fileID: 1598395688033067532}
