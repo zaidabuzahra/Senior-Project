@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RunTime
@@ -11,12 +12,12 @@ namespace RunTime
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!hasActivated && CompareTag("Player"))
+            if (!hasActivated && other.CompareTag("Player"))
             {
+                Debug.LogWarning("ENTERED");
                 hasActivated = true;
                 anim.SetTrigger("SpiderActive");
             }
         }
-
     }
 }

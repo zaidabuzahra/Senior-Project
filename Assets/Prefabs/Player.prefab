@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2841185708563826257}
   - component: {fileID: 2660422818043672553}
   - component: {fileID: 8778953644217702245}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -665,7 +665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2285265769192771194}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502506004072145800}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: FollowTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +761,7 @@ GameObject:
   - component: {fileID: 3645732490695853226}
   - component: {fileID: 2288526272650408498}
   - component: {fileID: 7485464105438027315}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3623312148155767850}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: AimLookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201511144889598845}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: LookAtTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
