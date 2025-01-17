@@ -46,12 +46,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlueValue: 8.72
-    - _EmmisionStrenght: 6.2
-    - _GreenValue: 40.56
+    - _BlueValue: 0
+    - _EmmisionStrenght: 7.79
+    - _GreenValue: 30
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RedValue: 6.92
+    - _RedValue: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmmisionColor: {r: 0.01132071, g: 0.01132071, b: 0.01132071, a: 1}
