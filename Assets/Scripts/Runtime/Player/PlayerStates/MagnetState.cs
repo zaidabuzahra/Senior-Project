@@ -21,22 +21,16 @@ namespace RunTime.Player
         {
             animator.SetTrigger("Magnet");
 
-            InputSignals.Instance.OnInputUseUtilityPressed = Pressed;
-            InputSignals.Instance.OnInputUseUtilityReleased = Released;
-            InputSignals.Instance.OnInputFlipUtilityPressed = FlipUtility;
+            InputSignals.Instance.OnInputUseMainUtility = Pressed;
+            InputSignals.Instance.OnInputFlipUtility = FlipUtility;
             InputSignals.Instance.OnInputShootPressed = ShootPod;
             //
         }
 
-        private void Pressed()
+        private void Pressed(bool state)
         {
-            _isHeld = true;
-        }
-
-        private void Released()
-        {
-            _isHeld = false;
-            _isShooting = false;
+            _isHeld = state;
+            if (!_isHeld) _isShooting = false;
         }
 
         public override void Execute()

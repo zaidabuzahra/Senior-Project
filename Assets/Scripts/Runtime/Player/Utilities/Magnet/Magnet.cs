@@ -12,7 +12,7 @@ namespace RunTime
         private void OnEnable()
         {
             //InputSignals.Instance.OnInputUseUtilityPressed = UseUtility;
-            InputSignals.Instance.OnInputFlipUtilityPressed += FlipUtility;
+            InputSignals.Instance.OnInputFlipUtility += FlipUtility;
         }
 
         private void UseUtility()

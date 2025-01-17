@@ -7,21 +7,20 @@ namespace RunTime
     [CreateAssetMenu(fileName = "PlayerStats", menuName = "Player/Stats")]
     public class PlayerDataSO : ScriptableObject
     {
-        [Header("Speed related data")]
-        public float speed;
+        [Header("Movement data")]
+        public float walkingSpeed;
         public float sprintSpeed;
         public float aimingSpeed;
         [InspectorLabel("Character facing directino turn speed")]
         public float turnSpeed;
 
-        [Header("Step up stairs")]
-        public float stepHeight = 0.3f;
-        public float stepCheckDistance = 0.5f;
-        public float stepSmooth = 5f;
+        [Header("Dash data")]
+        public float dashPower;
+        public float dashCountdown;
 
         [Space(20)]
 
-        [Header("Jump related data")]
+        [Header("Jump data")]
         public float verticalJumpPower;
         public float forwardJumpPower;
         public float airControl;

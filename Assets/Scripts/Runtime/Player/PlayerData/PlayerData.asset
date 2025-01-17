@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae821c298d1b74946a32c07a2c325803, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  speed: 2500
+  walkingSpeed: 1500
   sprintSpeed: 2500
   aimingSpeed: 3
   turnSpeed: 5
-  stepHeight: 500
-  stepCheckDistance: 500
-  stepSmooth: 5
+  dashPower: 10
+  dashCountdown: 0
   verticalJumpPower: 20
   forwardJumpPower: 5
   airControl: 0.7

@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 namespace RunTime.Input
 {
@@ -13,51 +15,81 @@ namespace RunTime.Input
         {
             InputSignals.Instance.OnInputeLookUpdate?.Invoke(context.ReadValue<Vector2>());
         }
+        public void OnJumpPress(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputJumpPressed?.Invoke(true); }
+            else if (context.canceled) { InputSignals.Instance.OnInputJumpPressed?.Invoke(false); }
+        }
+
         public void OnSprinting(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputUseUtilityPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputUseUtilityReleased?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputSprintPressed?.Invoke(true); }
+            else if (context.canceled) { InputSignals.Instance.OnInputSprintPressed?.Invoke(false); }
         }
-        public void OnOpenWheelPress(InputAction.CallbackContext context)
+
+        public void OnUseMainUtility(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelOpen?.Invoke(); }
-            //else if (context.canceled) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputUseMainUtility?.Invoke(true); }
+            else if (context.canceled) { InputSignals.Instance.OnInputUseMainUtility?.Invoke(false); }
         }
-        public void OnCloseWheelPress(InputAction.CallbackContext context)
+
+        public void OnUseSideUtility(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputUseSideUtility?.Invoke(true); }
+            else if (context.canceled) { InputSignals.Instance.OnInputUseSideUtility?.Invoke(false); }
         }
+
+        public void OnAim(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputAimPressed?.Invoke(true); }
+            else if (context.canceled) { InputSignals.Instance.OnInputAimPressed?.Invoke(false); }
+        }
+
         public void OnShootPress(InputAction.CallbackContext context)
         {
             if (context.performed) { InputSignals.Instance.OnInputShootPressed?.Invoke(); }
             else if (context.canceled) { InputSignals.Instance.OnInputShootReleased?.Invoke(); }
         }
-        public void OnInteractPress(InputAction.CallbackContext context)
+
+        public void OnDash(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputInteractPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputInteractReleased?.Invoke(); }
-        }
-        public void OnJumpPress(InputAction.CallbackContext context)
-        {
-            if (context.performed) { InputSignals.Instance.OnInputJumpPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputJumpReleased?.Invoke(); }
+            if (context.performed) InputSignals.Instance.OnInputDash?.Invoke();
         }
 
-        public void OnAim(InputAction.CallbackContext context)
+        public void OnInteractPress(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputAimPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputAimReleased?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputInteract?.Invoke(); }
+            //else if (context.canceled) { InputSignals.Instance.OnInputInteractReleased?.Invoke(); }
+        }
+
+        public void OnSwitchMagnet(InputAction.CallbackContext context)
+        {
+            if (context.performed) InputSignals.Instance.OnInputSwitchMagnet?.Invoke();
+        }
+
+        public void OnSwitchElectiricty(InputAction.CallbackContext context)
+        {
+            if (context.performed) InputSignals.Instance.OnInputSwitchElectricity?.Invoke();
         }
 
         public void OnFlipUtility(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputFlipUtilityPressed?.Invoke(); }
-            else if (context.canceled) { InputSignals.Instance.OnInputFlipUtilityReleased?.Invoke();}
+            if (context.performed) { InputSignals.Instance.OnInputFlipUtility?.Invoke(); }
+            //else if (context.canceled) { InputSignals.Instance.OnInputFlipUtilityReleased?.Invoke();}
         }
 
         public void OnRetrieveMagnets(InputAction.CallbackContext context)
         {
-            if (context.performed) { InputSignals.Instance.OnInputRetrieveMagnetPodsPressed?.Invoke(); }
+            if (context.performed) { InputSignals.Instance.OnInputRetrieveMagnetPods?.Invoke(); }
         }
+        /*public void OnOpenWheelPress(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelOpen?.Invoke(); }
+            //else if (context.canceled) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
+        }*/
+        /*public void OnCloseWheelPress(InputAction.CallbackContext context)
+        {
+            if (context.performed) { InputSignals.Instance.OnInputUtilityWheelClose?.Invoke(); }
+        }*/
     }
 }

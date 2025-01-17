@@ -12,6 +12,7 @@ namespace RunTime.Player
         public PlayerDataSO playerData;
         public PlayerBaseState currentState; // make private
         public LayerMask layer; //fix and adjust
+        public Camera cam;
         [Header("Object References")]
         [SerializeField]
         private Animator _animator; //organize 
@@ -48,6 +49,7 @@ namespace RunTime.Player
         private void Awake()
         {
             _states = new(this, _animator);
+            cam = Camera.main;
         }
 
         private void Start()
@@ -110,6 +112,7 @@ namespace RunTime.Player
         {
             Gizmos.DrawWireSphere(legTransform.position, legTransform.localScale.x);
         }
+
         #region input functions
         private void SwitchToMagnet()
         {
@@ -121,54 +124,42 @@ namespace RunTime.Player
             SwitchUtilities(UtilityType.FullBody);
         }
 
-        private void PressAim()
+        private void PressAim(bool state)
         {
-            isAiming = true;
+            isAiming = state;
         }
 
-        private void ReleaseAim()
+
+        private void PressJump(bool state)
         {
-            isAiming = false;
+            jumpPressed = state;
         }
 
-        private void SwitchInstructionUI() // temporary for submissions only
+        private void PressSprint(bool state)
         {
-            bool state = uiInstruction.activeInHierarchy ? false : true;
-            uiInstruction.SetActive(state);
+            isSprinting = state;
         }
 
-        private void PressJump()
+        private void Dash()
         {
-            jumpPressed = true;
-        }
-
-        private void ReleaseJump()
-        {
-            jumpPressed = false;
-        }
-
-        private void PressSprint()
-        {
-            isSprinting = true;
-        }
-
-        private void ReleaseSprint()
-        {
-            isSprinting = false;
+            Rgbd.AddForce(cam.transform.right.normalized * MoveValue.x * playerData.dashPower, ForceMode.Impulse);
         }
 
         private void OnEnable()
         {
             InputSignals.Instance.OnInputMoveUpdate += MoveUpdate;
-            InputSignals.Instance.OnInputUtilityWheelOpen += SwitchToMagnet;
-            InputSignals.Instance.OnInputUtilityWheelClose += SwitchToFullBody;
+            InputSignals.Instance.OnInputSwitchMagnet += SwitchToMagnet;
+            InputSignals.Instance.OnInputSwitchElectricity += SwitchToFullBody;
             InputSignals.Instance.OnInputAimPressed += PressAim;
-            InputSignals.Instance.OnInputAimReleased += ReleaseAim;
             InputSignals.Instance.OnInputJumpPressed += PressJump;
-            InputSignals.Instance.OnInputJumpReleased += ReleaseJump;
             InputSignals.Instance.OnInputSprintPressed += PressSprint;
-            InputSignals.Instance.OnInputSprintReleased += ReleaseSprint;
+            InputSignals.Instance.OnInputDash += Dash;
         }
         #endregion
+        private void SwitchInstructionUI() // temporary for submissions only
+        {
+            bool state = uiInstruction.activeInHierarchy ? false : true;
+            uiInstruction.SetActive(state);
+        }
     }
 }
