@@ -4018,8 +4018,8 @@ MonoBehaviour:
       customPreviewImage: {fileID: 0}
     - name: Grass_Prefab Long
       settings:
-        brushRadius: 1
-        brushSpacing: 0.5
+        brushRadius: 0.16
+        brushSpacing: 0.439
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
