@@ -56,6 +56,8 @@ namespace RunTime.Player
         {
             currentState = _states.GroundedState();
             currentState.Enter();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void Update()
@@ -128,7 +130,6 @@ namespace RunTime.Player
         {
             isAiming = state;
         }
-
 
         private void PressJump(bool state)
         {
