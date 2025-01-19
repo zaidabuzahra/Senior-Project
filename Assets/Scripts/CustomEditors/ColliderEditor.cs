@@ -1,6 +1,6 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
-
 namespace EditorTool
 {
     [CustomEditor(typeof(CollisionTool))]
@@ -46,3 +46,5 @@ namespace EditorTool
         Sphere
     }
 }
+
+#endif

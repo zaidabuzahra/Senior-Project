@@ -16,7 +16,6 @@ namespace RunTime
             {
                 other.gameObject.GetComponent<Animator>().SetTrigger("Activate");
             }
-            Debug.Log(other.tag);
         }
     }
 }

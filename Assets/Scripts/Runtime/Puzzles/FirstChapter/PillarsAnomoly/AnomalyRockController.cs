@@ -9,7 +9,7 @@ namespace RunTime.Puzzle.PillarAnomaly
         [SerializeField] private Animator shockwave;
         private Animator _animator;
         private float _countDown = 5f;
-
+        public AudioSource source;
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -25,12 +25,14 @@ namespace RunTime.Puzzle.PillarAnomaly
                 shockwave.SetTrigger("Attack");
                 CameraController.Instance.ShakeCamera(1f, 0.3f);
                 _countDown = 5f;
+                source.Play();
             }
         }
 
         public override void Resolved()
         {
             _animator.SetBool("Done", true);
+            Destroy(this);
         }
     }
 }

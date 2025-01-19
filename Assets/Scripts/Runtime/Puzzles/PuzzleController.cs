@@ -7,7 +7,6 @@ namespace RunTime
         [SerializeField] private ObjectInPlace[] conditions;
         [SerializeField] private ResolvedEvent[] resolvedEvents;
 
-        public ApplyShader shader;
         public void Notify()
         {
             for (int i = 0; i < conditions.Length; i++)
@@ -22,7 +21,6 @@ namespace RunTime
             {
                 resolvedEvents[i].Resolved();
             }
-            shader.StartColorChange();
         }
     }
 }

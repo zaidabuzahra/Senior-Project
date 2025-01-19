@@ -71,7 +71,7 @@ namespace RunTime
 
         public override void Exit()
         {
-            animator.SetBool("Walking", false);
+            //animator.SetBool("Walking", false);
         }
     }
 }
