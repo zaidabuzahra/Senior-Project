@@ -138,8 +138,8 @@ Material:
     - _TerrainSize: 233.8
     - _USETERRAINCOLOR: 1
     - _UseTerrainColor: 0
-    - _WindInstensity: 0.22
-    - _WindSpeed: 0.1
+    - _WindInstensity: 0.77
+    - _WindSpeed: 0.18
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
