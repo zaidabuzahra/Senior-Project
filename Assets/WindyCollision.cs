@@ -4,13 +4,13 @@ namespace RunTime
 {
     public class WindyCollision : MonoBehaviour
     {
-        public Vector3 force;
+        public float force;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Windy"))
             {
-                other.gameObject.GetComponent<Rigidbody>().AddForce(force);
+                other.gameObject.GetComponent<Rigidbody>().AddForce(other.gameObject.transform.forward * -force);
             }
             else if (other.gameObject.CompareTag("Animation"))
             {
