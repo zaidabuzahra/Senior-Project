@@ -1,11 +1,15 @@
 using DG.Tweening;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Splines;
 
 namespace RunTime.Utilities.Magnet
 {
     public class SplineConstrainedPillar : Magnetizable
     {
+        [SerializeField] private Transform pillar;
         [SerializeField] private SplineAnimate splineAnimation;
         [SerializeField] private float tolerence = 0.5f;
         private float _max;
@@ -21,15 +25,15 @@ namespace RunTime.Utilities.Magnet
         {
             //FirstInteraction();
             float dir;
-            if (direction.x - transform.position.x > 0)
+            if (direction.x - pillar.position.x > 0)
             {
-                if (direction.x - transform.position.x < 0.1f) return;
-                dir = direction.y - transform.position.y < 0 ? _max : _min;
+                //if (direction.x - transform.position.x < 0.1f) return;
+                dir = direction.z - pillar.position.z < 0 ? _max : _min;
             }
             else
             {
-                if (direction.y - transform.position.y < 0.1f) return;
-                dir = direction.y - transform.position.y > 0 ? _max : _min;
+                //if (direction.z - transform.position.z < 0.1f) return;
+                dir = direction.z - pillar.position.z < 0 ? _max : _min;
             }
             //dir = magnetPole != pole ? _max : _min;
             if (magnetPole != pole)
@@ -37,12 +41,11 @@ namespace RunTime.Utilities.Magnet
                 dir = _max == dir ? _min : _max;
             }
 
-            ApplyPower(dir);
+            ApplyPower(dir, magnetPole);
         }
 
-        private void ApplyPower(float dir)
+        private void ApplyPower(float dir, MagnetPole magnetPole)
         {
-            Debug.Log(splineAnimation.ElapsedTime + " " + dir);
             if (splineAnimation.ElapsedTime < _min + tolerence && dir == _min) splineAnimation.ElapsedTime = _min + tolerence;
             if (splineAnimation.ElapsedTime > _max - tolerence && dir == _max) splineAnimation.ElapsedTime = _max - tolerence;
             splineAnimation.ElapsedTime = Mathf.Lerp(splineAnimation.ElapsedTime, dir, forceStrength * Time.deltaTime);

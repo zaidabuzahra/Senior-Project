@@ -12,6 +12,11 @@ namespace RunTime
             {
                 other.gameObject.GetComponent<Rigidbody>().AddForce(force);
             }
+            else if (other.gameObject.CompareTag("Animation"))
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("Activate");
+            }
+            Debug.Log(other.tag);
         }
     }
 }

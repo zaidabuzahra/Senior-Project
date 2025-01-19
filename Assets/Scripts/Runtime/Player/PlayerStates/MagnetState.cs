@@ -1,3 +1,4 @@
+using RunTime.Cam;
 using UnityEngine;
 
 namespace RunTime.Player
@@ -58,7 +59,7 @@ namespace RunTime.Player
                     context.aimedAtObject.GetComponent<Magnetizable>().HighlightTarget();
                 }
             }
-            context.lineRenderer.SetPosition(0, context.transform.position);
+            context.lineRenderer.SetPosition(0, context.followObject.transform.position);
             if (context.aimedAtObject) context.lineRenderer.SetPosition(1, context.aimedAtObject.transform.position);
             if (_isHeld && context.aimedAtObject)
             {
@@ -77,6 +78,17 @@ namespace RunTime.Player
         private void FlipUtility()
         {
             currentPole = currentPole == MagnetPole.Red ? MagnetPole.Blue : MagnetPole.Red;
+            Debug.Log(context.lineRenderer.material);
+            if (currentPole == MagnetPole.Red)
+            {
+                context.lineRenderer.material.SetFloat("_RedValue", 1f);
+                context.lineRenderer.material.SetFloat("_BlueValue", 0.1f);
+            }
+            else
+            {
+                context.lineRenderer.material.SetFloat("_RedValue", 0.1f);
+                context.lineRenderer.material.SetFloat("_BlueValue", 1f);
+            }
             //magnetColor.GetComponent<MeshRenderer>().material = currentPole == MagnetPole.Red ? red : blue;
         }
 

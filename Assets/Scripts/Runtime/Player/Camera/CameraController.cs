@@ -1,10 +1,11 @@
 using Cinemachine;
+using Cinemachine.Editor;
 using UnityEditor;
 using UnityEngine;
 
 namespace RunTime.Cam
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoSingleton<CameraController>
     {
         [SerializeField] private CameraDataSO cameraData;
 
@@ -18,11 +19,14 @@ namespace RunTime.Cam
         private float _rotationPowerY;
         private float _upLimit;
         private float _downLimit;
+        private Camera _cam;
 
         private Vector2 _lookValue;
+        private float _shakeTimer;
 
         private void Start()
         {
+            _cam = Camera.main;
             _followTarget = standardCamera.Follow.gameObject;
             _lookAt = standardCamera.LookAt.gameObject;
 
@@ -35,6 +39,7 @@ namespace RunTime.Cam
         private void Update()
         {
             HandleCameraRotation();
+            HandleCameraShake();
         }
 
         private void HandleCameraRotation()
@@ -59,6 +64,15 @@ namespace RunTime.Cam
             _followTarget.transform.localEulerAngles = angles;
         }
 
+        private void HandleCameraShake()
+        {
+            if (_shakeTimer <= 0)
+            {
+                standardCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                return;
+            }
+            _shakeTimer -= Time.deltaTime;
+        }
         private void SwitchCamera(CameraEnum state)
         {
             switch (state)
@@ -94,6 +108,12 @@ namespace RunTime.Cam
         {
             InputSignals.Instance.OnInputeLookUpdate += LookUpdate;
             CameraSignals.Instance.OnSwitchCamera += SwitchCamera;
+        }
+
+        public void ShakeCamera(float amplitude, float timer)
+        {
+            standardCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+            _shakeTimer = timer;
         }
     }
 }

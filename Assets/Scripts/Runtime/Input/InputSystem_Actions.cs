@@ -118,6 +118,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""FlipUtility"",
+                    ""type"": ""Button"",
+                    ""id"": ""50def7d9-5cb6-4928-a3d8-ec5aba1f749b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RetrieveUtility"",
                     ""type"": ""Button"",
                     ""id"": ""aa0300eb-eca7-4e70-b736-5b9542d027ea"",
@@ -468,7 +477,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a8a257aa-fb20-465b-8dc0-9808775ff448"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -539,6 +548,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""SwitchUtilityElectricity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5164eef-bbc4-4fd2-9570-3433d13db8f5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""FlipUtility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1136,6 +1156,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_UseUtilityMain = m_Player.FindAction("UseUtilityMain", throwIfNotFound: true);
         m_Player_UseUtilitySide = m_Player.FindAction("UseUtilitySide", throwIfNotFound: true);
+        m_Player_FlipUtility = m_Player.FindAction("FlipUtility", throwIfNotFound: true);
         m_Player_RetrieveUtility = m_Player.FindAction("RetrieveUtility", throwIfNotFound: true);
         m_Player_SwitchUtilityMagnet = m_Player.FindAction("SwitchUtilityMagnet", throwIfNotFound: true);
         m_Player_SwitchUtilityElectricity = m_Player.FindAction("SwitchUtilityElectricity", throwIfNotFound: true);
@@ -1228,6 +1249,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_UseUtilityMain;
     private readonly InputAction m_Player_UseUtilitySide;
+    private readonly InputAction m_Player_FlipUtility;
     private readonly InputAction m_Player_RetrieveUtility;
     private readonly InputAction m_Player_SwitchUtilityMagnet;
     private readonly InputAction m_Player_SwitchUtilityElectricity;
@@ -1245,6 +1267,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @UseUtilityMain => m_Wrapper.m_Player_UseUtilityMain;
         public InputAction @UseUtilitySide => m_Wrapper.m_Player_UseUtilitySide;
+        public InputAction @FlipUtility => m_Wrapper.m_Player_FlipUtility;
         public InputAction @RetrieveUtility => m_Wrapper.m_Player_RetrieveUtility;
         public InputAction @SwitchUtilityMagnet => m_Wrapper.m_Player_SwitchUtilityMagnet;
         public InputAction @SwitchUtilityElectricity => m_Wrapper.m_Player_SwitchUtilityElectricity;
@@ -1287,6 +1310,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @UseUtilitySide.started += instance.OnUseUtilitySide;
             @UseUtilitySide.performed += instance.OnUseUtilitySide;
             @UseUtilitySide.canceled += instance.OnUseUtilitySide;
+            @FlipUtility.started += instance.OnFlipUtility;
+            @FlipUtility.performed += instance.OnFlipUtility;
+            @FlipUtility.canceled += instance.OnFlipUtility;
             @RetrieveUtility.started += instance.OnRetrieveUtility;
             @RetrieveUtility.performed += instance.OnRetrieveUtility;
             @RetrieveUtility.canceled += instance.OnRetrieveUtility;
@@ -1330,6 +1356,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @UseUtilitySide.started -= instance.OnUseUtilitySide;
             @UseUtilitySide.performed -= instance.OnUseUtilitySide;
             @UseUtilitySide.canceled -= instance.OnUseUtilitySide;
+            @FlipUtility.started -= instance.OnFlipUtility;
+            @FlipUtility.performed -= instance.OnFlipUtility;
+            @FlipUtility.canceled -= instance.OnFlipUtility;
             @RetrieveUtility.started -= instance.OnRetrieveUtility;
             @RetrieveUtility.performed -= instance.OnRetrieveUtility;
             @RetrieveUtility.canceled -= instance.OnRetrieveUtility;
@@ -1531,6 +1560,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnUseUtilityMain(InputAction.CallbackContext context);
         void OnUseUtilitySide(InputAction.CallbackContext context);
+        void OnFlipUtility(InputAction.CallbackContext context);
         void OnRetrieveUtility(InputAction.CallbackContext context);
         void OnSwitchUtilityMagnet(InputAction.CallbackContext context);
         void OnSwitchUtilityElectricity(InputAction.CallbackContext context);

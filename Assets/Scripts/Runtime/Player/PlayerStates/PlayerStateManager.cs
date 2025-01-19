@@ -50,6 +50,7 @@ namespace RunTime.Player
         {
             _states = new(this, _animator);
             cam = Camera.main;
+            Resources.UnloadUnusedAssets();
         }
 
         private void Start()

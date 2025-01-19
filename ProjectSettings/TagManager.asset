@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magnet
   - Windy
+  - Animation
   layers:
   - Default
   - TransparentFX
