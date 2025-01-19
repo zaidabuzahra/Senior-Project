@@ -14,6 +14,7 @@ namespace RunTime.Player
         public override void Enter()
         {
             Debug.Log("SPRINTING");
+            animator.SetBool("Sprinting", true);
             context.speed = context.playerData.sprintSpeed;
         }
 
@@ -28,6 +29,7 @@ namespace RunTime.Player
 
         public override void Exit()
         {
+            animator.SetBool("Sprinting", false);
             context.speed = context.playerData.walkingSpeed;
         }
         public override void FixedExecute()

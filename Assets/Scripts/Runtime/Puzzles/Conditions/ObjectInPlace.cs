@@ -14,7 +14,6 @@ namespace RunTime
         [SerializeField] private float tolerence;
         [SerializeField] private Transform anamoly;
 
-        private float _lineColor;
         private float _distance;
 
         private void Update()
@@ -28,7 +27,8 @@ namespace RunTime
 
         public bool Check()
         {
-            _distance = Vector3.Distance(target.transform.position.normalized, targetPosition.position.normalized);
+            _distance = Vector3.Distance(transform.position.normalized, targetPosition.position.normalized);
+            Debug.Log(_distance);
             UpdateLine();
             if (_distance < tolerence)
             {
@@ -42,7 +42,10 @@ namespace RunTime
         {
             lineRenderer.SetPosition(0, target.transform.position);
             lineRenderer.SetPosition(1, anamoly.position);
-            lineRenderer.material.color = Color.Lerp(Color.red, Color.green, (Mathf.Abs(_distance -1) / 1));
+            lineRenderer.material.SetFloat("_Red", Mathf.Lerp(0, 1, (Mathf.Abs(_distance - 1) / 1) * 100 * Time.deltaTime));
+            lineRenderer.material.SetFloat("_Green", Mathf.Lerp(1, 0, (Mathf.Abs(_distance - 1) / 1) * 100 * Time.deltaTime));
+            Debug.Log(lineRenderer.material.GetFloat("_Red"));
+            //lineRenderer.material.color = Color.Lerp(Color.red, Color.green, (Mathf.Abs(_distance -1) / 1));
             //lineRenderer.DOColor(new Color2(Color.red, Color.red), new Color2(Color.green, Color.green), (Mathf.Abs(_distance - 1) / 1));
         }
     }
