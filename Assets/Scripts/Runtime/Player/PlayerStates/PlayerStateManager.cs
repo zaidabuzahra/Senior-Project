@@ -102,14 +102,14 @@ namespace RunTime.Player
 
         public bool Grounded()
         {
-            bool grounded = Physics.CheckSphere(legTransform.position, legTransform.localScale.x, layer);
-            Debug.DrawLine(transform.position, legTransform.position, Color.red);
+            bool grounded = Physics.CheckBox(legTransform.position, legTransform.localScale, legTransform.rotation,layer);
+            Debug.DrawLine(transform.position, legTransform.position, Color.black);
             return grounded;
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(legTransform.position, legTransform.localScale.x);
+            Gizmos.DrawWireCube(legTransform.position, legTransform.localScale);
         }
 
         #region input functions

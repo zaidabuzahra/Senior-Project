@@ -15,13 +15,13 @@ namespace RunTime.Player
         {
             //Debug.LogError("Grounded");
             base.Enter();
-            context.Rgbd.linearVelocity = new Vector3(context.Rgbd.linearVelocity.x, 0, context.Rgbd.linearVelocity.z);
             animator.SetTrigger("FullBody");
         }
 
         public override void Execute()
         {
             OnCheckSwitchStates();
+
         }
 
         public override void Exit()

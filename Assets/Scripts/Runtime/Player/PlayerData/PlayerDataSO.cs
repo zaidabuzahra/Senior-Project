@@ -25,6 +25,7 @@ namespace RunTime
         public float forwardJumpPower;
         public float airControl;
         public float gravityPower;
+        public float groundedGravity;
         public float gravityMultiplier;
     }
 }
