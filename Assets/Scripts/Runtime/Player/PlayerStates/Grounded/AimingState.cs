@@ -1,13 +1,15 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 namespace RunTime.Player
 {
     public class AimingState : PlayerBaseState
     {
-        private Vector3 _mousePos = Vector3.zero;
         private Vector2 _screenCenter = new (Screen.width/2, Screen.height/2);
         private Ray _ray;
+        private PlayerBaseState _oldState;
+        private readonly Camera _cam = Camera.main;
 
         public AimingState(PlayerStateManager context, StateFactory states, Animator animator) : base(context, states, animator) 
         {
@@ -15,8 +17,6 @@ namespace RunTime.Player
             SetSubState(states.IdleState());
         }
 
-        private PlayerBaseState _oldState;
-        private readonly Camera _cam = Camera.main;
         public override void Enter()
         {
             //animator.SetBool("Aim", true);
@@ -35,7 +35,6 @@ namespace RunTime.Player
             _ray = _cam.ScreenPointToRay(_screenCenter);
             if (Physics.Raycast(_ray, out context.Hit, 999f, context.layerMask))
             {
-                _mousePos = context.Hit.point;
                 if (context.Hit.transform.gameObject != context.aimedAtObject)
                 {
                     if (context.aimedAtObject.CompareTag("Magnet")) context.aimedAtObject.GetComponent<Magnetizable>().GrayoutTarget();
@@ -43,12 +42,20 @@ namespace RunTime.Player
                 }
                 if (context.aimedAtObject.CompareTag("Magnet"))
                 {
-                    context.aimedAtObject.GetComponent<Magnetizable>()?.HighlightTarget();
+                    context.aimedAtObject.GetComponent<Magnetizable>().HighlightTarget();
                 }
             }
             //Debug sphere
-            context.sphere.transform.position = _mousePos;
-            context.meshObject.transform.rotation = Quaternion.Euler(0,_cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y,0);
+            //context.sphere.transform.position = _mousePos;
+            float currentY = context.meshObject.transform.rotation.eulerAngles.y;
+            float targetY = _cam.GetComponent<CinemachineBrain>()
+                               .ActiveVirtualCamera.Follow.transform.rotation.eulerAngles.y;
+
+            // Interpolate the Y angle (adjust 'rotationSpeed' as needed)
+            float newY = Mathf.LerpAngle(currentY, targetY, Time.deltaTime * context.playerData.aimTurnSpeed);
+
+            // Apply the new rotation
+            context.meshObject.transform.rotation = Quaternion.Euler(0, newY, 0);
             context.followObject.transform.rotation = Quaternion.Euler(_cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.transform.rotation.eulerAngles);
         }
 

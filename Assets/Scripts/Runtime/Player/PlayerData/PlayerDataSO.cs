@@ -13,6 +13,7 @@ namespace RunTime
         public float aimingSpeed;
         [InspectorLabel("Character facing directino turn speed")]
         public float turnSpeed;
+        public float aimTurnSpeed;
 
         [Header("Dash data")]
         public float dashPower;

@@ -23,7 +23,7 @@ namespace RunTime.Puzzle.PillarAnomaly
             {
                 _animator.SetTrigger("Attack");
                 shockwave.SetTrigger("Attack");
-                CameraController.Instance.ShakeCamera(1f, 0.3f);
+                //CameraController.Instance.ShakeCamera(1f, 0.3f);
                 _countDown = 5f;
                 source.Play();
             }

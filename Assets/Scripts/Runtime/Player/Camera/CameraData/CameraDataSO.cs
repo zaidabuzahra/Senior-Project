@@ -13,13 +13,13 @@ namespace RunTime.Cam
         public float aimVerticalSensitivty;
 
         [Header("Camera rotation limits")]
-        [Range(0, 180)]
+        [Range(-100, 180)]
         public float downLimit;
-        [Range(180, 360)]
+        [Range(-100, 360)]
         public float upLimit;
-        [Range(0, 180)]
+        [Range(-100, 180)]
         public float aimDownLimit;
-        [Range(180, 360)]
+        [Range(-180, 360)]
         public float aimUpLimit;
 
     }
